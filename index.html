@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yakir Nisim Shlomo - Software Developer Portfolio">
+    <title>Yakir Nisim Shlomo | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">Yakir Shlomo</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+<nav class="navbar">
+    <div class="nav-brand">Yakir Shlomo</div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="myVideo">
+            <source src="./images/World Live Background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    
+    
+    <div class="hero-content">
+        <h1 id="hello-im-yakir-nisim-shlomo" class="typing-text">
+            Hello, I'm Yakir Nisim Shlomo
+        </h1>
+        <p>Software Developer | Creator | Innovator</p>
+        
+        <div class="cta-buttons">
+            <a href="#projects" class="btn primary">View Projects</a>
+            <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <div class="mouse"></div>
+        <span>Scroll Down</span>
+    </div>
+</section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section fade-in">
+        <h2>About Me</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>Here you can add a detailed description about yourself, your background, and your aspirations in software development.</p>
+                <p>Share your experience, education, and what drives you in the field of development.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">X+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Y+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="./images/picture of my self.png" alt="My Profile" class="profile-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="content-section fade-in">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Frontend Development</h3>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>Backend Development</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>MongoDB</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-tools"></i>
+                <h3>Tools & Methods</h3>
+                <ul>
+                    <li>Git</li>
+                    <li>Docker</li>
+                    <li>Agile</li>
+                    <li>CI/CD</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="content-section fade-in">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="/api/placeholder/400/300" alt="Project 1">
+                </div>
+                <div class="project-content">
+                    <h3>Project Name</h3>
+                    <p>Brief description of the project and technologies used.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn small">Live Demo</a>
+                        <a href="#" class="btn small secondary">Source Code</a>
+                    </div>
+                </div>
+            </article>
+            <!-- Add more project cards as needed -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section fade-in">
+        <h2>Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Interested in working together? Let's connect!</p>
+                <div class="social-links">
+                    <a href="mailto:shlomoyakir00@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>shlomoyakir00@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/yakir-shlomo/" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/YakirShlomo" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 Yakir Nisim Shlomo. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
