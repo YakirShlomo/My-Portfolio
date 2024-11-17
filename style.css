@@ -1,3 +1,4 @@
+/* Root variables for color and styling */
 :root {
     --primary-color: #5f8f9e;
     --secondary-color: #5f8f9e;
@@ -9,16 +10,19 @@
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Reset and box-sizing */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
+/* Base body styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color);
@@ -33,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
-/* Navbar */
+/* Navbar styles */
 .navbar {
     position: fixed;
     top: 0;
@@ -53,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
-/* ניווט דסקטופ */
+/* Desktop navigation links */
 .nav-links {
     display: flex;
 }
@@ -76,7 +80,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color);
 }
 
-/* תפריט המבורגר למובייל */
+/* Hamburger menu for mobile */
 .nav-toggle {
     display: none;
     font-size: 1.5rem;
@@ -85,11 +89,12 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 1001;
 }
 
+/* Mobile navigation menu */
 .mobile-nav {
     position: fixed;
     top: 4.2rem;
     left: 0;
-    width: 40%;
+    width: 44%;
     height: calc(100% - 5rem);
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
@@ -106,6 +111,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(0);
 }
 
+/* Animation for mobile nav links */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -242,12 +248,14 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255, 255, 255, 0.9);
 }
 
+/* Adjustments for medium screens */
 @media (max-width: 1200px) {
     .video-background video {
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
+/* Adjustments for small screens */
 @media (max-width: 768px) {
     .video-background video {
         transform: translate(-50%, -50%) scale(1.2);
@@ -263,6 +271,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Scroll indicator at the bottom of the hero section */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -272,6 +281,7 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+/* Typing effect for hero text */
 .typing-text {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -573,7 +583,7 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem;
-        /* הוספתי את השורות הבאות כדי לוודא שה-navbar נשאר קבוע */
+        /* Ensure navbar stays fixed at the top on mobile */
         position: fixed;
         top: 0;
         left: 0;
@@ -581,7 +591,7 @@ footer {
         z-index: 1000;
     }
 
-    /* הסתרת ניווט דסקטופ והצגת תפריט המבורגר */
+    /* Hide desktop navigation and show hamburger menu */
     .nav-links {
         display: none;
     }
@@ -601,7 +611,6 @@ footer {
     .navbar {
         justify-content: space-between;
         align-items: center;
-        /* הסרת position: relative; */
     }
 
     .hero h1 {
