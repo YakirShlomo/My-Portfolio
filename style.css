@@ -9,13 +9,6 @@
     --shadow: 0 5px 15px rgba(0, 0, 0, 0);
 }
 
-/* Dark Theme Colors */
-body.dark-theme {
-    --text-color: #ffffff;
-    --bg-color: #1a1a1a;
-    --card-bg: #2d2d2d;
-    --navbar-bg: #000000;
-}
 
 * {
     box-sizing: border-box;
@@ -116,13 +109,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .video-background video {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1.5);
     object-fit: cover;
-    object-position: center center;
+    z-index: 0;
     animation: zoomOut 1.5s ease-out forwards;
 }
 
@@ -141,7 +134,8 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.5); /* התאמת שקיפות לרקע */
+    z-index: 1; /* מעל הווידאו */
 }
 
 .hero-content {
@@ -163,19 +157,17 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* הוסף את ה-Media Queries בסוף הקובץ, בחלק של Responsive Design */
+
 @media (max-width: 1200px) {
     .video-background video {
-        transform: translate(-50%, -50%) scale(1.2);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
 @media (max-width: 768px) {
     .video-background video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(1.2);
+        object-fit: cover; /* ודא שהוידאו מכסה את המסך */
     }
     
     .hero h1 {
