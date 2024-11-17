@@ -6,9 +6,8 @@
     --card-bg: #2d2d2d;
     --navbar-bg: #000000;
     --transition: all 0.3s ease;
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0);
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 
 * {
     box-sizing: border-box;
@@ -46,15 +45,6 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: var(--transition);
-}
-
-.navbar.scroll-down {
-    transform: translateY(-100%);
-}
-
-.navbar.scroll-up {
-    transform: translateY(0);
 }
 
 .nav-brand {
@@ -63,23 +53,119 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
-.navbar ul {
+/* ניווט דסקטופ */
+.nav-links {
+    display: flex;
+}
+
+.nav-links ul {
     list-style: none;
     display: flex;
     gap: 2rem;
 }
 
-.navbar a {
+.nav-links a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
     transition: var(--transition);
 }
 
-.navbar a:hover {
+.nav-links a.active,
+.mobile-nav a.active {
     color: var(--primary-color);
 }
 
+/* תפריט המבורגר למובייל */
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 4.2rem;
+    left: 0;
+    width: 32%;
+    height: calc(100% - 5rem);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mobile-nav.open {
+    transform: translateX(0);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.mobile-nav li {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.mobile-nav.open li {
+    animation: slideIn 0.5s forwards;
+}
+
+.mobile-nav.open li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.mobile-nav.open li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.mobile-nav.open li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.mobile-nav.open li:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.mobile-nav.open li:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 2rem 0;
+}
+
+.mobile-nav li {
+    margin-bottom: 1.5rem;
+}
+
+.mobile-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active {
+    color: var(--primary-color);
+}
 
 /* Hero Section */
 .hero {
@@ -93,10 +179,9 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     color: white;
     overflow: hidden;
-    padding-top: 60px; /* מרווח עבור הnavbar */
+    padding-top: 60px;
 }
 
-/* הוסף את החלקים החדשים כאן */
 .video-background {
     position: absolute;
     top: 0;
@@ -134,8 +219,8 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* התאמת שקיפות לרקע */
-    z-index: 1; /* מעל הווידאו */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .hero-content {
@@ -157,7 +242,6 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255, 255, 255, 0.9);
 }
 
-
 @media (max-width: 1200px) {
     .video-background video {
         transform: translate(-50%, -50%) scale(1);
@@ -167,7 +251,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
     .video-background video {
         transform: translate(-50%, -50%) scale(1.2);
-        object-fit: cover; /* ודא שהוידאו מכסה את המסך */
+        object-fit: cover;
     }
     
     .hero h1 {
@@ -470,26 +554,7 @@ footer {
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.footer-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--primary-color);
+    text-align: center;
 }
 
 /* Animations */
@@ -508,12 +573,36 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem;
+        /* הוספתי את השורות הבאות כדי לוודא שה-navbar נשאר קבוע */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
     }
 
-    .navbar ul {
+    /* הסתרת ניווט דסקטופ והצגת תפריט המבורגר */
+    .nav-links {
         display: none;
     }
-    
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-brand {
+        order: 2;
+    }
+
+    .nav-toggle {
+        order: 1;
+    }
+
+    .navbar {
+        justify-content: space-between;
+        align-items: center;
+        /* הסרת position: relative; */
+    }
 
     .hero h1 {
         font-size: 2.5rem;

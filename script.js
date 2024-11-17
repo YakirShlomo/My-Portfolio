@@ -1,7 +1,48 @@
+// תפריט המבורגר למובייל
+const navToggle = document.querySelector('.nav-toggle');
+const mobileNav = document.querySelector('.mobile-nav');
+const navToggleIcon = document.querySelector('.nav-toggle i');
+
+// פונקציה לסגירת התפריט
+function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    // החזרת האייקון להמבורגר
+    navToggleIcon.classList.add('fa-bars');
+    navToggleIcon.classList.remove('fa-times');
+}
+
+// פתיחת וסגירת התפריט עם אנימציה והחלפת האייקון
+navToggle.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+    // החלפת האייקון
+    navToggleIcon.classList.toggle('fa-bars');
+    navToggleIcon.classList.toggle('fa-times');
+});
+
+// סגירת התפריט בעת לחיצה על קישור בתפריט המובייל
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        closeMobileNav();
+    });
+});
+
+// סגירת התפריט בעת לחיצה מחוץ לתפריט
+document.addEventListener('click', (e) => {
+    if (!mobileNav.contains(e.target) && !navToggle.contains(e.target)) {
+        closeMobileNav();
+    }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
+
+        // סגירת תפריט המובייל לאחר לחיצה על קישור
+        if (mobileNav.classList.contains('open')) {
+            closeMobileNav();
+        }
+
         document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
         });
@@ -48,7 +89,6 @@ fadeElements.forEach(element => {
     observer.observe(element);
 });
 
-
 // Contact form handling
 const contactForm = document.querySelector('.contact-form');
 contactForm.addEventListener('submit', async (e) => {
@@ -61,24 +101,26 @@ contactForm.addEventListener('submit', async (e) => {
     alert('Thank you for your message! I will get back to you soon.');
 });
 
-// Navbar scroll behavior
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
+// סגירת התפריט בעת גלילה
+window.addEventListener('scroll', closeMobileNav);
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        navbar.classList.remove('scroll-up');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !navbar.classList.contains('scroll-down')) {
-        navbar.classList.remove('scroll-up');
-        navbar.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && navbar.classList.contains('scroll-down')) {
-        navbar.classList.remove('scroll-down');
-        navbar.classList.add('scroll-up');
-    }
-    lastScroll = currentScroll;
-});
+// חיווי מיקום בדף ב-navbar
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function activateNavLink() {
+    let scrollPosition = window.pageYOffset + 500; // התאמה למיקום ה-navbar
+
+    sections.forEach(section => {
+        if (section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${section.id}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+window.addEventListener('scroll', activateNavLink);
