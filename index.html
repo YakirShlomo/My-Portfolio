@@ -105,39 +105,94 @@
     <!-- Skills Section -->
     <section id="skills" class="content-section fade-in">
         <h2>My Skills</h2>
+        
+        <!-- Category Navigation Buttons -->
+        <div class="skill-categories">
+            <button class="category-btn active" data-category="All">All</button>
+            <button class="category-btn" data-category="Programming Languages">Programming Languages</button>
+            <button class="category-btn" data-category="Web Development">Web Development</button>
+            <button class="category-btn" data-category="Design and Multimedia">Design and Multimedia</button>
+            <button class="category-btn" data-category="Game Development">Game Development</button>
+            <button class="category-btn" data-category="Operating Systems">Operating Systems</button>
+            <button class="category-btn" data-category="Development Tools">Development Tools</button>
+        </div>
+        
+        <!-- Skills Grid -->
         <div class="skills-grid">
-            <div class="skill-card">
+            <!-- Example Skill Item -->
+            <div class="skill-item" data-category="Programming Languages">
+                <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" alt="" style="width: 50px;height: 50px;">
+                <span>C++</span>
+            </div>
+            <div class="skill-item" data-category="Programming Languages">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" alt="" style="width: 50px;height: 50px;">
+                <span>Python</span>             <!-- לתקן הוא רצת עקום ~!!!!!!!!!! -->
+
+            </div>
+
+            <div class="skill-item" data-category="Web Development">
+                <i class="fas fa-user-cog"></i>
+                <span>HTML</span>
+            </div>
+            <div class="skill-item" data-category="Web Development">
+                <i class="fa-brands fa-js"></i>
+                <span>JavaScript</span>
+            </div>
+            <div class="skill-item" data-category="Web Development">
+                <i class="fa-brands fa-css3-alt"></i>
+                <span>CSS3</span>
+            </div>
+
+            <div class="skill-item" data-category="Design and Multimedia">
+                <i class="fas fa-network-wired"></i>
+                <span>Illustrator</span>
+            </div>
+            <div class="skill-item" data-category="Design and Multimedia">
+                <i class="fas fa-network-wired"></i>
+                <span>Photoshop</span>
+            </div>
+            <div class="skill-item" data-category="Design and Multimedia">
+                <i class="fa-brands fa-html5"></i>
+                <span>Premiere Pro</span>
+            </div>
+            <div class="skill-item" data-category="Design and Multimedia">
                 <i class="fas fa-code"></i>
-                <h3>Frontend Development</h3>
-                <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                    <li>React</li>
-                </ul>
+                <span>After Effects</span>
             </div>
-            <div class="skill-card">
-                <i class="fas fa-database"></i>
-                <h3>Backend Development</h3>
-                <ul>
-                    <li>Node.js</li>
-                    <li>Python</li>
-                    <li>SQL</li>
-                    <li>MongoDB</li>
-                </ul>
+
+            <div class="skill-item" data-category="Game Development">
+                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/ue4editor-icon.png" alt="Unreal Engine 5" style="width: 50px;height: 50px;">
+                <span>Unreal Engine 5</span>
             </div>
-            <div class="skill-card">
-                <i class="fas fa-tools"></i>
-                <h3>Tools & Methods</h3>
-                <ul>
-                    <li>Git</li>
-                    <li>Docker</li>
-                    <li>Agile</li>
-                    <li>CI/CD</li>
-                </ul>
+
+            <div class="skill-item" data-category="Operating Systems">
+                <i class="fa-brands fa-linux"></i>
+                <span>Linux</span>
+            </div>
+
+            <div class="skill-item" data-category="Development Tools">
+                <i class="fas fa-code"></i>
+                <span>VS Code</span>
+            </div>
+            <div class="skill-item" data-category="Development Tools">
+                <i class="fas fa-code"></i>
+                <span>Clion</span>
+            </div>
+            <div class="skill-item" data-category="Development Tools">
+                <i class="fa-brands fa-git"></i>
+                <span>Git</span>
+            </div>
+            <div class="skill-item" data-category="Development Tools">
+                <i class="fa-brands fa-github"></i>
+                  <span>GitHub</span>
+            </div>
+            <div class="skill-item" data-category="Development Tools">
+                <i class="fas fa-code"></i>
+                <span>ChatGPT</span>
             </div>
         </div>
     </section>
+
 
     <!-- Projects Section -->
     <section id="projects" class="content-section fade-in">
