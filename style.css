@@ -486,7 +486,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .skill-selection-mobile select {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     background-color: var(--card-bg);
