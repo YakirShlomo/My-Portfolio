@@ -446,6 +446,101 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
 }
 
+/* Course Progress Section */
+#course-progress {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.course-progress-container {
+    display: flex;
+    justify-content: center;
+    gap: 10rem; /* רווח בין הטבעות */
+    flex-wrap: wrap; /* מותאם למובייל */
+}
+
+.course-progress {
+    position: relative;
+    width: 120px;
+    height: 160px; /* הגדלת הגובה כדי להכיל את הטקסט */
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress-ring__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Styling for Course Details */
+.course-details {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.course-details h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.course-details a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.course-details a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments for Course Progress */
+@media (max-width: 768px) {
+    #course-progress {
+        padding: 3rem 1rem;
+    }
+
+    .course-progress-container {
+        gap: 4rem; /* רווח קטן יותר במובייל */
+    }
+
+    .course-progress {
+        width: 100px;
+        height: 140px; /* התאמה לגודל קטן יותר */
+    }
+
+    .progress-ring__text {
+        font-size: 1.2rem;
+    }
+
+    .course-details h3 {
+        font-size: 0.9rem;
+    }
+
+    .course-details a {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
 /* Skills Section */
 
 /* Container for category buttons */

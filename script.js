@@ -169,3 +169,46 @@ if (skillSelect) {
         filterSkills(selectedCategory);
     });
 }
+
+// Course Progress Rings
+function setCourseProgress(percent, selector) {
+    const circle = document.querySelector(selector);
+    const radius = circle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference;
+
+    const offset = circumference - (percent / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const courseProgressSections = document.querySelectorAll('#course-progress .course-progress');
+
+    courseProgressSections.forEach((progress, index) => {
+        const progressText = progress.querySelector('.progress-ring__text');
+        let percent = 0;
+
+        // הגדרת האחוזים לכל טבעת
+        switch(index) {
+            case 0:
+                percent = 30; // טבעת ראשונה
+                break;
+            case 1:
+                percent = 0; // טבעת שנייה
+                break;
+            case 2:
+                percent = 10; // טבעת שלישית
+                break;
+            default:
+                percent = 0;
+        }
+
+        progressText.textContent = `${percent}%`;
+        const circleSelector = `.course-progress:nth-child(${index + 1}) .progress-ring__circle`;
+        setCourseProgress(percent, circleSelector);
+    });
+});
+
+
