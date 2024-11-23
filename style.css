@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 40%;
     height: calc(100% - 5rem);
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     z-index: 1000;
     transition: transform 0.3s ease;
     transform: translateX(-100%);
@@ -288,6 +288,56 @@ h1, h2, h3, h4, h5, h6 {
     .hero p {
         font-size: 1.2rem;
     }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-grid,
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .content-section {
+        padding: 3rem 1rem;
+    }
+
+    .content-section h2 {
+        font-size: 2rem;
+    }
+
+    .skill-categories {
+        display: none; /* Hide category buttons on mobile */
+    }
+
+    .skill-selection-mobile {
+        display: flex; /* Show selection bar on mobile */
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 1rem;
+    }
+
+    .skill-item {
+        margin: 0; /* תיקון ערך margin לא חוקי */
+    }
+
+    .skill-item .skill-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .skill-item span {
+        font-size: 0.8rem;
+    }
 }
 
 /* Scroll indicator at the bottom of the hero section */
@@ -396,29 +446,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    display: block;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
 /* Skills Section */
 
 /* Container for category buttons */
@@ -451,6 +478,24 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+/* Selection Bar for Mobile */
+.skill-selection-mobile {
+    display: none; /* Hidden by default, shown on mobile */
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.skill-selection-mobile select {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
 /* Skills grid layout */
 .skills-grid {
     display: grid;
@@ -470,19 +515,22 @@ h1, h2, h3, h4, h5, h6 {
     transition: opacity 0.6s ease, transform 0.6s ease;
     opacity: 1;
     position: relative;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 /* Icon within skill item */
-.skill-item i {
-    font-size: 2.5rem;
+.skill-item .skill-icon {
+    width: 50px;
+    height: 50px;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 
 /* Skill name */
 .skill-item span {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 0.5rem;
 }
 
@@ -507,7 +555,9 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 20px var(--glow-color);
 }
 
-
+.skill-item .skill-icon:hover {
+    transform: scale(1.1);
+}
 
 /* Fade effect for category button transitions */
 .category-btn {
@@ -541,7 +591,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-5px);
 }
 
-.project-image img {
+.project-image video {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -570,6 +620,32 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
+}
+
+/* Fill animation "Source Code" */
+.btn.secondary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn.secondary::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--primary-color); 
+    z-index: -1;
+    transition: height 0.5s ease;
+}
+
+.btn.secondary:hover::before {
+    height: 100%;
+}
+
+.btn.secondary:hover {
+    color: white; 
 }
 
 /* Contact Section */
@@ -606,37 +682,6 @@ h1, h2, h3, h4, h5, h6 {
 .social-link:hover {
     color: var(--primary-color);
     transform: translateX(5px);
-}
-
-.contact-form {
-    background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-.form-group textarea {
-    height: 150px;
-    resize: vertical;
 }
 
 /* Footer */
@@ -729,13 +774,31 @@ footer {
     }
 
     .skill-categories {
-        flex-direction: column;
-        gap: 0.5rem;
+        display: none; /* Hide category buttons on mobile */
+    }
+
+    .skill-selection-mobile {
+        display: flex; /* Show selection bar on mobile */
+        justify-content: center;
+        margin-bottom: 2rem;
     }
 
     .skills-grid {
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
         gap: 1rem;
+    }
+
+    .skill-item {
+        margin: 4px;
+    }
+
+    .skill-item .skill-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .skill-item span {
+        font-size: 0.8rem;
     }
 }
 

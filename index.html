@@ -4,7 +4,7 @@
     <!-- Meta tags for responsiveness and description -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta description="Yakir Shlomo - Software Developer Portfolio">
+    <meta name="description" content="Yakir Shlomo - Software Developer Portfolio">
     <title>Yakir Shlomo | Portfolio</title>
     <!-- Linking external stylesheets and fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -45,8 +45,8 @@
     <section id="home" class="hero">
         <div class="video-background">
             <!-- Background video -->
-            <video autoplay muted loop playsinline id="myVideo">
-                <source src="./images/World Live Background.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline class="project-video">
+                <source src="images/World Live Background.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="video-overlay"></div>
@@ -85,6 +85,7 @@
                     
                 <p>If you're looking for someone dedicated, creative, and with love for the profession, take a look through my projects, and let's get in touch!</p>
                 
+               <!---
                 <div class="stats">
                     <div class="stat-item">
                         <span class="stat-number">X+</span>
@@ -95,9 +96,10 @@
                         <span class="stat-label">Projects Completed</span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="about-image">
-                <img src="./images/picture of my self.png" alt="My Profile" class="profile-image">
+                <img src="images/picture of my self.png" alt="My Profile" class="profile-image">
             </div>
         </div>
     </section>
@@ -106,7 +108,7 @@
     <section id="skills" class="content-section fade-in">
         <h2>My Skills</h2>
         
-        <!-- Category Navigation Buttons -->
+        <!-- Category Navigation Buttons (Visible on Desktop) -->
         <div class="skill-categories">
             <button class="category-btn active" data-category="All">All</button>
             <button class="category-btn" data-category="Programming Languages">Programming Languages</button>
@@ -115,79 +117,103 @@
             <button class="category-btn" data-category="Game Development">Game Development</button>
             <button class="category-btn" data-category="Operating Systems">Operating Systems</button>
             <button class="category-btn" data-category="Development Tools">Development Tools</button>
+            <button class="category-btn" data-category="Version Control">Version Control</button>
+            <button class="category-btn" data-category="AI Tools">AI Tools</button>
+        </div>
+        
+        <!-- Selection Bar for Mobile -->
+        <div class="skill-selection-mobile">
+            <select id="skill-category-select">
+                <option value="All">All</option>
+                <option value="Programming Languages">Programming Languages</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Design and Multimedia">Design and Multimedia</option>
+                <option value="Game Development">Game Development</option>
+                <option value="Operating Systems">Operating Systems</option>
+                <option value="Development Tools">Development Tools</option>
+                <option value="Version Control">Version Control</option>
+                <option value="AI Tools">AI Tools</option>
+            </select>
         </div>
         
         <!-- Skills Grid -->
         <div class="skills-grid">
             <!-- Example Skill Item -->
             <div class="skill-item" data-category="Programming Languages">
-                <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" alt="" style="width: 50px;height: 50px;">
+                <img src="https://avatars.githubusercontent.com/u/13841574?v=4" alt="C++" class = "skill-icon">
                 <span>C++</span>
             </div>
             <div class="skill-item" data-category="Programming Languages">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" alt="" style="width: 50px;height: 50px;">
-                <span>Python</span>             <!-- לתקן הוא רצת עקום ~!!!!!!!!!! -->
-
+                <img src="https://www.topsinfosolutions.com/wp-content/uploads/2024/07/python-development-icon.webp" alt="Python" class = "skill-icon">
+                <span>Python</span>           
             </div>
 
             <div class="skill-item" data-category="Web Development">
-                <i class="fas fa-user-cog"></i>
-                <span>HTML</span>
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-html-5-logo-icon-download-in-svg-png-gif-file-formats--programming-langugae-language-pack-logos-icons-1175208.png?f=webp&w=256" alt="HTML" class="skill-icon">
+                <span>HTML5</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <i class="fa-brands fa-js"></i>
-                <span>JavaScript</span>
+                <img src="https://logodownload.org/wp-content/uploads/2022/04/javascript-logo.png" alt="JavaScript" class = "skill-icon">         
+                 <span>JavaScript</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <i class="fa-brands fa-css3-alt"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/1200px-CSS3_logo.svg.png" alt="CSS3" class = "skill-icon">                
                 <span>CSS3</span>
             </div>
 
             <div class="skill-item" data-category="Design and Multimedia">
-                <i class="fas fa-network-wired"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1051px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator" class = "skill-icon">                
                 <span>Illustrator</span>
             </div>
             <div class="skill-item" data-category="Design and Multimedia">
-                <i class="fas fa-network-wired"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1051px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop" class = "skill-icon">                
                 <span>Photoshop</span>
             </div>
             <div class="skill-item" data-category="Design and Multimedia">
-                <i class="fa-brands fa-html5"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/1200px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Premiere Pro" class = "skill-icon">                
                 <span>Premiere Pro</span>
             </div>
             <div class="skill-item" data-category="Design and Multimedia">
-                <i class="fas fa-code"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/1200px-Adobe_After_Effects_CC_icon.svg.png" alt="After Effects" class = "skill-icon">                
                 <span>After Effects</span>
             </div>
 
             <div class="skill-item" data-category="Game Development">
-                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/ue4editor-icon.png" alt="Unreal Engine 5" style="width: 50px;height: 50px;">
+                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/ue4editor-icon.png" alt="Unreal Engine 5" class = "skill-icon">
                 <span>Unreal Engine 5</span>
+            </div>
+            <div class="skill-item" data-category="Game Development">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-blender-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-vol-1-pack-logos-icons-3029884.png?f=webp&w=256" alt="Blender" class = "skill-icon">
+                <span>Blender</span>
             </div>
 
             <div class="skill-item" data-category="Operating Systems">
-                <i class="fa-brands fa-linux"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/1200px-Icons8_flat_linux.svg.png" alt="Linux" class = "skill-icon">                
                 <span>Linux</span>
             </div>
 
             <div class="skill-item" data-category="Development Tools">
-                <i class="fas fa-code"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1024px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code" class = "skill-icon">                
                 <span>VS Code</span>
             </div>
             <div class="skill-item" data-category="Development Tools">
-                <i class="fas fa-code"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Clion.svg/640px-Clion.svg.png" alt="Clion" class = "skill-icon">                
                 <span>Clion</span>
             </div>
             <div class="skill-item" data-category="Development Tools">
-                <i class="fa-brands fa-git"></i>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/1024px-PyCharm_Icon.svg.png" alt="PyCharm" class = "skill-icon">                
+                <span>PyCharm</span>
+            </div>
+            <div class="skill-item" data-category="Version Control">
+                <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" class = "skill-icon">                
                 <span>Git</span>
             </div>
-            <div class="skill-item" data-category="Development Tools">
-                <i class="fa-brands fa-github"></i>
-                  <span>GitHub</span>
+            <div class="skill-item" data-category="Version Control">
+                <img src="https://cdn0.iconfinder.com/data/icons/shift-logotypes/32/Github-512.png" alt="GitHub" class = "skill-icon">                  
+                <span>GitHub</span>
             </div>
-            <div class="skill-item" data-category="Development Tools">
-                <i class="fas fa-code"></i>
+            <div class="skill-item" data-category="AI Tools">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" alt="ChatGPT" class = "skill-icon">                
                 <span>ChatGPT</span>
             </div>
         </div>
@@ -200,30 +226,33 @@
         <div class="projects-grid">
             <article class="project-card">
                 <div class="project-image">
-                    <img src="/api/placeholder/400/300" alt="Project 1">
+                    <video autoplay muted loop playsinline class="project-video">
+                        <source src="images/Project1-Video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="project-content">
-                    <h3>Project Name</h3>
-                    <p>Brief description of the project and technologies used.</p>
+                    <h3>This Website</h3>
+                    <p>This website serves as a professional and responsive portfolio, crafted using HTML5, CSS3, and JavaScript.
+                        It elegantly showcases my skills, the projects I've developed, and my professional experience.
+                        Key features include a dynamic video background in the hero section, skill filtering options, seamless navigation, and full mobile responsiveness, ensuring an exceptional user experience across all devices.</p>
                     <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS3</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="btn small">Live Demo</a>
-                        <a href="#" class="btn small secondary">Source Code</a>
+                        <a href="https://github.com/YakirShlomo/Yakir-Shlomo-WebSite" class="btn small secondary">Source Code</a>
                     </div>
                 </div>
             </article>
             <!-- Add more project cards as needed -->
         </div>
     </section>
-
+    
     <!-- Contact Section -->
     <section id="contact" class="content-section fade-in">
         <h2>Get In Touch</h2>
-        <div class="contact-container">
             <!-- Contact Information -->
             <div class="contact-info">
                 <p>Interested in working together? Let's connect!</p>
@@ -242,24 +271,8 @@
                     </a>
                 </div>
             </div>
-            <!-- Contact Form -->
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="btn primary">Send Message</button>
-            </form>
-        </div>
     </section>
+        
 
     <!-- Footer -->
     <footer>

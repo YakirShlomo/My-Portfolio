@@ -81,6 +81,8 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            // Optionally unobserve the element after it becomes visible
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -89,27 +91,19 @@ fadeElements.forEach(element => {
     observer.observe(element);
 });
 
-// Contact form handling
-const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(contactForm);
-    // Add your form submission logic here
-    console.log('Form submitted:', Object.fromEntries(formData));
-    // Reset form after submission
-    contactForm.reset();
-    alert('Thank you for your message! I will get back to you soon.');
-});
-
 // Close mobile menu on scroll
-window.addEventListener('scroll', closeMobileNav);
+window.addEventListener('scroll', () => {
+    if (mobileNav.classList.contains('open')) {
+        closeMobileNav();
+    }
+});
 
 // Highlight active navigation link based on scroll position
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
 function activateNavLink() {
-    let scrollPosition = window.pageYOffset + 500; // Adjust for navbar height
+    let scrollPosition = window.pageYOffset + 700; // Adjust for navbar height
 
     sections.forEach(section => {
         if (
@@ -131,7 +125,30 @@ window.addEventListener('scroll', activateNavLink);
 // Skill Categories Filtering
 const categoryButtons = document.querySelectorAll('.category-btn');
 const skillItems = document.querySelectorAll('.skill-item');
+const skillSelect = document.getElementById('skill-category-select'); // Select element for mobile
 
+// Function to filter skills
+function filterSkills(category) {
+    skillItems.forEach(item => {
+        if (category === 'All' || item.getAttribute('data-category') === category) {
+            item.style.display = 'flex';
+            // Use CSS transitions for fade-in effect instead of JavaScript
+            item.classList.remove('hidden');
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, 0); // Trigger reflow
+        } else {
+            // Use CSS transitions for fade-out effect instead of JavaScript
+            item.classList.remove('visible');
+            item.classList.add('hidden');
+            setTimeout(() => {
+                item.style.display = 'none';
+            }, 0); // Match the CSS transition duration
+        }
+    });
+}
+
+// Event listeners for category buttons (Desktop)
 categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Remove active class from all buttons
@@ -141,19 +158,14 @@ categoryButtons.forEach(button => {
 
         const category = button.getAttribute('data-category');
 
-        skillItems.forEach(item => {
-            if (category === 'All' || item.getAttribute('data-category') === category) {
-                item.style.display = 'flex';
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                }, 0); // Reduced from 100ms
-            } else {
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    item.style.display = 'none';
-                }, 0); // Reduced from 500ms
-            }
-        });
+        filterSkills(category);
     });
 });
+
+// Event listener for select dropdown (Mobile)
+if (skillSelect) {
+    skillSelect.addEventListener('change', (e) => {
+        const selectedCategory = e.target.value;
+        filterSkills(selectedCategory);
+    });
+}
