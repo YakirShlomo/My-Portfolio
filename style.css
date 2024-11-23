@@ -517,11 +517,13 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .course-progress-container {
-        gap: 4rem; /* רווח קטן יותר במובייל */
+        flex-direction: column; /* מגדיר את הכיוון לטור */
+        align-items: center;    /* מרכז את הטבעות בתוך הקונטיינר */
+        margin-bottom: 6rem;              /* רווח בין הטבעות - ניתן להתאים לפי הצורך */
     }
 
     .course-progress {
-        width: 100px;
+        width: 110px;
         height: 140px; /* התאמה לגודל קטן יותר */
     }
 
