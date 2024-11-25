@@ -171,6 +171,64 @@ if (skillSelect) {
 }
 
 
+// פתיחת חלון צף עם קובץ ה-PDF של קורות החיים (תואם למובייל)
+document.getElementById('resume-button').addEventListener('click', function() {
+    // יצירת אלמנט של חלון צף
+    const overlay = document.createElement('div');
+    overlay.id = 'pdf-overlay';
+
+    // אלמנט object להצגת קובץ ה-PDF
+    const pdfObject = document.createElement('object');
+    pdfObject.data = 'Yakir Nissim Shlomo Resume.pdf'; // החלף בנתיב לקובץ ה-PDF שלך
+    pdfObject.id = 'pdf-object';
+    pdfObject.type = 'application/pdf';
+
+    // הגדרת סגנונות inline כדי להתאים למובייל
+    pdfObject.style.width = '90%';
+    pdfObject.style.height = '80vh';
+
+    // תוכן fallback במקרה שהדפדפן לא יכול להציג את ה-PDF
+    const fallbackLink = document.createElement('a');
+    fallbackLink.href = 'Yakir Nissim Shlomo Resume.pdf'; // החלף בנתיב לקובץ ה-PDF שלך
+    fallbackLink.textContent = 'Download Resume';
+    pdfObject.appendChild(fallbackLink);
+
+    // כפתור לסגירת החלון הצף
+    const closeButton = document.createElement('button');
+    closeButton.id = 'close-pdf';
+    closeButton.textContent = 'Close';
+
+    // הוספת האלמנטים ל-overlay
+    overlay.appendChild(pdfObject);
+    overlay.appendChild(closeButton);
+
+    // הוספת ה-overlay לגוף הדף
+    document.body.appendChild(overlay);
+
+    // האזנה לאירוע סגירת החלון
+    closeButton.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+    });
+
+      // האזנה לאירוע סגירת החלון בלחיצה מחוץ ל-container
+      overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+    });
+
+    // מונע סגירת החלון בלחיצה בתוך ה-container
+    pdfContainer.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+}); 
+
+
+
+
+
+
+
+
+
 // Course Progress Rings <!-- Add only when I'm at 50 percent -->
 
 //

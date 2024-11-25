@@ -340,6 +340,56 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* סגנונות לחלון הצף של ה-PDF */
+#pdf-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem; /* הוספת padding כדי למנוע חיתוך במובייל */
+    overflow: auto; /* לאפשר גלילה אם התוכן גדול מהמסך */
+}
+
+#pdf-object {
+    width: 90%;
+    max-width: 800px;
+    height: 80vh;
+}
+
+#close-pdf {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close-pdf:hover {
+    background-color: var(--secondary-color);
+}
+
+/* התאמות למובייל */
+@media (max-width: 768px) {
+    #pdf-object {
+        width: 100%;
+        height: 70vh;
+    }
+
+    #close-pdf {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 /* Scroll indicator at the bottom of the hero section */
 .scroll-indicator {
     position: absolute;
