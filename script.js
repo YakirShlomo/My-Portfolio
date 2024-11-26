@@ -170,9 +170,17 @@ if (skillSelect) {
     });
 }
 
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
 // פתיחת חלון צף עם קובץ ה-PDF של קורות החיים (תואם למובייל)
 document.getElementById('resume-button').addEventListener('click', function() {
+
+    if (isMobileDevice()) {
+        window.location.href = 'Yakir Nissim Shlomo Resume.pdf';
+    }else{
+    
     // יצירת אלמנט של חלון צף
     const overlay = document.createElement('div');
     overlay.id = 'pdf-overlay';
@@ -219,6 +227,7 @@ document.getElementById('resume-button').addEventListener('click', function() {
     pdfContainer.addEventListener('click', function(event) {
         event.stopPropagation();
     });
+}
 }); 
 
 
