@@ -187,7 +187,7 @@ document.getElementById('resume-button').addEventListener('click', function() {
 
     // אלמנט object להצגת קובץ ה-PDF
     const pdfObject = document.createElement('object');
-    pdfObject.data = 'Yakir Nissim Shlomo Resume.pdf'; 
+    pdfObject.data = 'images/Yakir Nissim Shlomo Resume.pdf'; 
     pdfObject.id = 'pdf-object';
     pdfObject.type = 'application/pdf';
 
@@ -197,7 +197,7 @@ document.getElementById('resume-button').addEventListener('click', function() {
 
     // תוכן fallback במקרה שהדפדפן לא יכול להציג את ה-PDF
     const fallbackLink = document.createElement('a');
-    fallbackLink.href = 'Yakir Nissim Shlomo Resume.pdf'; 
+    fallbackLink.href = 'images/Yakir Nissim Shlomo Resume.pdf'; 
     fallbackLink.textContent = 'Download Resume';
     pdfObject.appendChild(fallbackLink);
 
