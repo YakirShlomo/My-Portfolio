@@ -231,24 +231,6 @@ document.getElementById('resume-button').addEventListener('click', function() {
 }); 
 
 
-// בחירת הווידאו
-const video = document.getElementById('star-wars-video');
-
-// זמן התחלה וסיום
-const startTime = 0.0; // זמן התחלה בשניות
-const endTime = 15.0; // זמן סיום בשניות
-
-// כשהווידאו נטען
-video.addEventListener('loadedmetadata', () => {
-    video.currentTime = startTime;
-});
-
-// כשהווידאו מנגן, בדוק אם עבר את זמן הסיום
-video.addEventListener('timeupdate', () => {
-    if (video.currentTime >= endTime) {
-        video.currentTime = startTime; // חזור לזמן ההתחלה
-    }
-});
 
 
 
