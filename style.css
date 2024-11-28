@@ -735,6 +735,10 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* שמירה על רווחים קבועים בין התוכן */
+    height: 100%; /* יישור גובה אחיד */
 }
 
 .project-card:hover {
@@ -749,6 +753,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* פיזור אחיד של תוכן */
+    flex-grow: 1; /* מניעת התכווצות */
 }
 
 .tech-stack {
@@ -767,9 +775,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .project-links {
+    margin-top: auto; /* דחיפת הכפתורים לתחתית */
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
+    justify-content: left; /* מרכז הכפתורים */
 }
 
 /* Fill animation "Source Code" */
