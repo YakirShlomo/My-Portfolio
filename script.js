@@ -178,7 +178,7 @@ function isMobileDevice() {
 document.getElementById('resume-button').addEventListener('click', function() {
 
     if (isMobileDevice()) {
-        window.location.href = 'Yakir Nissim Shlomo Resume.pdf';
+        window.location.href = 'images/Yakir Nissim Shlomo Resume.pdf';
     }else{
     
     // יצירת אלמנט של חלון צף
