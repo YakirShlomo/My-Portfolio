@@ -1,0 +1,3 @@
+[     742ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8124/favicon.ico:0
+[   33852ms] [INFO] Launched external handler for 'mailto:shlomoyakir00@gmail.com'. @ http://localhost:8124/index.html:0
+[   35126ms] [INFO] Launched external handler for 'mailto:shlomoyakir00@gmail.com'. @ http://localhost:8124/index.html:0

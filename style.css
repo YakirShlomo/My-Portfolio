@@ -365,10 +365,10 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; letter-spacing
 .hero__title .line { display: block; overflow: hidden; padding-bottom: .08em; }
 .hero__title .line > span { display: block; }
 .hero__title .line--accent > span { color: var(--accent); }
-.js .hero__title .line > span { transform: translateY(110%); }
-.is-loaded .hero__title .line > span { animation: hero-line-in 1s var(--ease-drawer) forwards; }
-.is-loaded .hero__title .line:nth-child(1) > span { animation-delay: .12s; }
-.is-loaded .hero__title .line:nth-child(2) > span { animation-delay: .26s; }
+/* pure-CSS entrance — runs on render, no JS dependency */
+.js .hero__title .line > span { animation: hero-line-in 1s var(--ease-drawer) both; }
+.js .hero__title .line:nth-child(1) > span { animation-delay: .12s; }
+.js .hero__title .line:nth-child(2) > span { animation-delay: .26s; }
 @keyframes hero-line-in { from { transform: translateY(110%); } to { transform: translateY(0); } }
 
 .hero__subtitle {
