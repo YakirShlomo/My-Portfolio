@@ -1,0 +1,301 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "YS" [ref=e3] [cursor=pointer]:
+      - /url: "#home"
+      - generic [ref=e4]: YS
+    - button "Open menu" [ref=e5] [cursor=pointer]
+  - generic [ref=e8]:
+    - list [ref=e9]:
+      - listitem [ref=e10]:
+        - link [ref=e11] [cursor=pointer]:
+          - /url: "#home"
+          - text: Home
+      - listitem [ref=e12]:
+        - link [ref=e13] [cursor=pointer]:
+          - /url: "#about"
+          - text: About
+      - listitem [ref=e14]:
+        - link [ref=e15] [cursor=pointer]:
+          - /url: "#skills"
+          - text: Skills
+      - listitem [ref=e16]:
+        - link [ref=e17] [cursor=pointer]:
+          - /url: "#projects"
+          - text: Projects
+      - listitem [ref=e18]:
+        - link [ref=e19] [cursor=pointer]:
+          - /url: "#contact"
+          - text: Contact
+    - generic [ref=e20]:
+      - link [ref=e21] [cursor=pointer]:
+        - /url: https://github.com/YakirShlomo
+        - generic [ref=e22]: 
+      - link [ref=e23] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/yakir-shlomo/
+        - generic [ref=e24]: 
+      - link [ref=e25] [cursor=pointer]:
+        - /url: mailto:shlomoyakir00@gmail.com
+        - generic [ref=e26]: 
+  - main [ref=e27]:
+    - generic [ref=e32]:
+      - paragraph [ref=e33]: Available for work · Israel
+      - heading "Yakir Shlomo builds for web & games." [level=1] [ref=e35]:
+        - generic [ref=e37]: Yakir Shlomo
+        - generic [ref=e39]: builds for web & games.
+      - paragraph [ref=e40]: Full-stack developer & Unreal Engine 5 creator. Software engineering student turning curiosity into shippable products.
+      - generic [ref=e41]:
+        - link "View projects " [ref=e42] [cursor=pointer]:
+          - /url: "#projects"
+          - generic [ref=e43]: View projects
+          - generic [ref=e45]: 
+        - button " Résumé" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: 
+            - text: Résumé
+    - generic [ref=e50]:
+      - generic [ref=e51]: React
+      - generic [ref=e52]: /
+      - generic [ref=e53]: Node.js
+      - generic [ref=e54]: /
+      - generic [ref=e55]: Express
+      - generic [ref=e56]: /
+      - generic [ref=e57]: MongoDB
+      - generic [ref=e58]: /
+      - generic [ref=e59]: C++
+      - generic [ref=e60]: /
+      - generic [ref=e61]: Python
+      - generic [ref=e62]: /
+      - generic [ref=e63]: Unreal Engine 5
+      - generic [ref=e64]: /
+      - generic [ref=e65]: Blender
+      - generic [ref=e66]: /
+      - generic [ref=e67]: JavaScript
+      - generic [ref=e68]: /
+      - generic [ref=e69]: HTML5
+      - generic [ref=e70]: /
+      - generic [ref=e71]: CSS3
+      - generic [ref=e72]: /
+      - generic [ref=e73]: React
+      - generic [ref=e74]: /
+      - generic [ref=e75]: Node.js
+      - generic [ref=e76]: /
+      - generic [ref=e77]: Express
+      - generic [ref=e78]: /
+      - generic [ref=e79]: MongoDB
+      - generic [ref=e80]: /
+      - generic [ref=e81]: C++
+      - generic [ref=e82]: /
+      - generic [ref=e83]: Python
+      - generic [ref=e84]: /
+      - generic [ref=e85]: Unreal Engine 5
+      - generic [ref=e86]: /
+      - generic [ref=e87]: Blender
+      - generic [ref=e88]: /
+      - generic [ref=e89]: JavaScript
+      - generic [ref=e90]: /
+      - generic [ref=e91]: HTML5
+      - generic [ref=e92]: /
+      - generic [ref=e93]: CSS3
+      - generic [ref=e94]: /
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - generic [ref=e97]: 01 /
+        - heading "About me" [level=2] [ref=e98]
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - paragraph [ref=e101]: I'm Yakir Shlomo, a second-year software engineering student at SCE College. My fascination with computers started early — always wondering how the websites, games and tools I used were actually made, then trying to build them myself.
+          - generic [ref=e102]:
+            - paragraph [ref=e103]: This site is where I keep the projects I've shipped so far — a working snapshot of what I care about. I'm driven by deepening what I know, sharpening how I build, and getting ideas all the way to done.
+            - paragraph [ref=e104]: "The goal: grow into a full-stack developer who builds responsive, efficient web apps, and a game developer who designs immersive, engaging experiences — and find the seams where those two worlds meet."
+            - paragraph [ref=e105]: My approach is simple. Find a field you genuinely like, then push it as far as you can — keep developing your skills, your thinking, your range. "Knowledge is power."
+            - paragraph [ref=e106]: If you're after someone dedicated, creative and serious about the craft — look through the projects below, then let's talk.
+          - list [ref=e107]:
+            - listitem [ref=e108]:
+              - generic [ref=e109]: Focus
+              - generic [ref=e110]: Full-stack web · Game dev
+            - listitem [ref=e111]:
+              - generic [ref=e112]: Studying
+              - generic [ref=e113]: Software Engineering · SCE College
+            - listitem [ref=e114]:
+              - generic [ref=e115]: Stack
+              - generic [ref=e116]: React · Node · MongoDB · Unreal 5
+            - listitem [ref=e117]:
+              - generic [ref=e118]: Based in
+              - generic [ref=e119]: Israel
+        - img "Portrait of Yakir Shlomo" [ref=e122]
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - generic [ref=e125]: 02 /
+        - heading "Skills & tools" [level=2] [ref=e126]
+      - combobox "Filter skills by category" [ref=e128]:
+        - option "All" [selected]
+        - option "Languages"
+        - option "Web"
+        - option "Design"
+        - option "Game"
+        - option "OS"
+        - option "Dev tools"
+        - option "Version control"
+        - option "AI"
+      - generic [ref=e129]:
+        - generic [ref=e130]:
+          - img "C++" [ref=e131]
+          - generic [ref=e132]: C++
+        - generic [ref=e133]:
+          - img "Python" [ref=e134]
+          - generic [ref=e135]: Python
+        - generic [ref=e136]:
+          - img "HTML5" [ref=e137]
+          - generic [ref=e138]: HTML5
+        - generic [ref=e139]:
+          - img "JavaScript" [ref=e140]
+          - generic [ref=e141]: JavaScript
+        - generic [ref=e142]:
+          - img "CSS3" [ref=e143]
+          - generic [ref=e144]: CSS3
+        - generic [ref=e145]:
+          - img "React" [ref=e146]
+          - generic [ref=e147]: React
+        - generic [ref=e148]:
+          - img "Node.js" [ref=e149]
+          - generic [ref=e150]: Node.js
+        - generic [ref=e151]:
+          - img "Express.js" [ref=e152]
+          - generic [ref=e153]: Express.js
+        - generic [ref=e154]:
+          - img "MongoDB" [ref=e155]
+          - generic [ref=e156]: MongoDB
+        - generic [ref=e157]:
+          - img "RESTful API" [ref=e158]
+          - generic [ref=e159]: RESTful API
+        - generic [ref=e160]:
+          - img "Adobe Illustrator" [ref=e161]
+          - generic [ref=e162]: Illustrator
+        - generic [ref=e163]:
+          - img "Adobe Photoshop" [ref=e164]
+          - generic [ref=e165]: Photoshop
+        - generic [ref=e166]:
+          - img "Adobe Premiere Pro" [ref=e167]
+          - generic [ref=e168]: Premiere Pro
+        - generic [ref=e169]:
+          - img "Adobe After Effects" [ref=e170]
+          - generic [ref=e171]: After Effects
+        - generic [ref=e172]:
+          - img "Unreal Engine 5" [ref=e173]
+          - generic [ref=e174]: Unreal Engine 5
+        - generic [ref=e175]:
+          - img "Blender" [ref=e176]
+          - generic [ref=e177]: Blender
+        - generic [ref=e178]:
+          - img "Linux" [ref=e179]
+          - generic [ref=e180]: Linux
+        - generic [ref=e181]:
+          - img "VS Code" [ref=e182]
+          - generic [ref=e183]: VS Code
+        - generic [ref=e184]:
+          - img "CLion" [ref=e185]
+          - generic [ref=e186]: CLion
+        - generic [ref=e187]:
+          - img "PyCharm" [ref=e188]
+          - generic [ref=e189]: PyCharm
+        - generic [ref=e190]:
+          - img "Git" [ref=e191]
+          - generic [ref=e192]: Git
+        - generic [ref=e193]:
+          - img "GitHub" [ref=e194]
+          - generic [ref=e195]: GitHub
+        - generic [ref=e196]:
+          - img "ChatGPT" [ref=e197]
+          - generic [ref=e198]: ChatGPT
+    - generic [ref=e199]:
+      - generic [ref=e200]:
+        - generic [ref=e201]: 03 /
+        - heading "Selected work" [level=2] [ref=e202]
+      - generic [ref=e203]:
+        - article [ref=e204]:
+          - generic [ref=e207]: Web
+          - generic [ref=e208]:
+            - heading "This portfolio" [level=3] [ref=e209]
+            - paragraph [ref=e210]: A responsive personal site built from scratch — animated hero, scroll-driven reveals, filterable skills and 3D project cards. Designed for a calm, fast experience on any device.
+            - list [ref=e211]:
+              - listitem [ref=e212]: HTML5
+              - listitem [ref=e213]: CSS3
+              - listitem [ref=e214]: JavaScript
+            - link " Source code" [ref=e216] [cursor=pointer]:
+              - /url: https://github.com/YakirShlomo/Yakir-Shlomo-WebSite
+              - generic [ref=e217]: 
+              - text: Source code
+        - article [ref=e218]:
+          - generic [ref=e221]: Cinematic
+          - generic [ref=e222]:
+            - heading "Star Wars — iconic scene" [level=3] [ref=e223]
+            - paragraph [ref=e224]: A real-time recreation of a classic Star Wars moment, focused on lighting, composition and the small details that carry a visual story.
+            - list [ref=e225]:
+              - listitem [ref=e226]: Unreal Engine 5
+              - listitem [ref=e227]: Blender
+            - link " Source code" [ref=e229] [cursor=pointer]:
+              - /url: https://github.com/YakirShlomo/StarWars-Cinematic-Scene
+              - generic [ref=e230]: 
+              - text: Source code
+        - article [ref=e231]:
+          - generic [ref=e234]: Full-stack
+          - generic [ref=e235]:
+            - heading "Tula-Eventor" [level=3] [ref=e236]
+            - paragraph [ref=e237]: An event-management app that makes planning and tracking events straightforward — real-time scheduling, user authentication and a clean interface for organizers and attendees alike.
+            - list [ref=e238]:
+              - listitem [ref=e239]: React
+              - listitem [ref=e240]: Node.js
+              - listitem [ref=e241]: Express
+              - listitem [ref=e242]: MongoDB
+            - link " Visit site" [ref=e244] [cursor=pointer]:
+              - /url: https://tula-eventor.onrender.com/
+              - generic [ref=e245]: 
+              - text: Visit site
+    - generic [ref=e246]:
+      - generic [ref=e247]:
+        - generic [ref=e248]: 04 /
+        - heading "Get in touch" [level=2] [ref=e249]
+      - generic [ref=e250]:
+        - paragraph [ref=e251]:
+          - text: Have a project in mind, a role to fill, or just want to talk shop?
+          - link "Send me a message " [ref=e252] [cursor=pointer]:
+            - /url: mailto:shlomoyakir00@gmail.com
+            - text: Send me a message
+            - generic [ref=e253]: 
+        - list [ref=e254]:
+          - listitem [ref=e255]:
+            - link " shlomoyakir00@gmail.com " [ref=e256] [cursor=pointer]:
+              - /url: mailto:shlomoyakir00@gmail.com
+              - generic [ref=e258]: 
+              - generic [ref=e259]: shlomoyakir00@gmail.com
+              - generic [ref=e261]: 
+          - listitem [ref=e262]:
+            - link " +972 52-464-2361 " [ref=e263] [cursor=pointer]:
+              - /url: https://wa.me/972524642361
+              - generic [ref=e265]: 
+              - generic [ref=e266]: +972 52-464-2361
+              - generic [ref=e268]: 
+          - listitem [ref=e269]:
+            - link " in/yakir-shlomo " [ref=e270] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/yakir-shlomo/
+              - generic [ref=e272]: 
+              - generic [ref=e273]: in/yakir-shlomo
+              - generic [ref=e275]: 
+          - listitem [ref=e276]:
+            - link " @YakirShlomo " [ref=e277] [cursor=pointer]:
+              - /url: https://github.com/YakirShlomo
+              - generic [ref=e279]: 
+              - generic [ref=e280]: "@YakirShlomo"
+              - generic [ref=e282]: 
+  - contentinfo [ref=e283]:
+    - generic [ref=e284]: Yakir Shlomo
+    - generic [ref=e285]:
+      - paragraph [ref=e286]: © 2026 Yakir Shlomo. Built with HTML, CSS & JavaScript.
+      - link "Back to top " [ref=e287] [cursor=pointer]:
+        - /url: "#home"
+        - text: Back to top
+        - generic [ref=e288]: 
+  - dialog:
+    - generic:
+      - button:
+        - generic: 

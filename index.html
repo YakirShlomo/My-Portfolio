@@ -1,408 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta tags for responsiveness and description -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Yakir Shlomo - Portfolio">
+    <meta name="description" content="Yakir Shlomo — Web & Game Developer. Full-stack developer and Unreal Engine 5 creator. Portfolio of projects, skills and experience.">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta property="og:title" content="Yakir Shlomo | Portfolio">
+    <meta property="og:description" content="Web & Game Developer · Full Stack · Unreal Engine 5">
+    <meta property="og:type" content="website">
     <title>Yakir Shlomo | Portfolio</title>
-    <!-- Linking external stylesheets and fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+    <!-- Scroll progress bar (scroll-driven CSS animation, JS fallback) -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Background ambient grain + glow -->
+    <div class="bg-fx" aria-hidden="true">
+        <div class="bg-glow bg-glow--a"></div>
+        <div class="bg-glow bg-glow--b"></div>
+        <div class="bg-grain"></div>
+    </div>
+
     <!-- Navbar -->
-    <nav class="navbar">
-        <!-- Hamburger menu button for mobile -->
-        <div class="nav-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <!-- Website logo or brand name -->
-        <div class="nav-brand">Yakir Shlomo</div>
-        <!-- Navigation links for desktop -->
-        <div class="nav-links">
-            <ul>
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-        <!-- Mobile navigation menu -->
-        <div class="mobile-nav">
-            <ul>
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header class="navbar" id="navbar">
+        <a href="#home" class="nav-brand" data-scroll-link>
+            <span class="nav-brand__mark">YS</span>
+            <span class="nav-brand__text">Yakir&nbsp;Shlomo</span>
+        </a>
 
-    <!-- Hero Section -->
+        <nav class="nav-links" aria-label="Primary">
+            <ul>
+                <li><a href="#home" class="nav-link" data-scroll-link><span>Home</span></a></li>
+                <li><a href="#about" class="nav-link" data-scroll-link><span>About</span></a></li>
+                <li><a href="#skills" class="nav-link" data-scroll-link><span>Skills</span></a></li>
+                <li><a href="#projects" class="nav-link" data-scroll-link><span>Projects</span></a></li>
+                <li><a href="#contact" class="nav-link" data-scroll-link><span>Contact</span></a></li>
+            </ul>
+        </nav>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+        </button>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li style="--i:0"><a href="#home" class="nav-link" data-scroll-link>Home</a></li>
+            <li style="--i:1"><a href="#about" class="nav-link" data-scroll-link>About</a></li>
+            <li style="--i:2"><a href="#skills" class="nav-link" data-scroll-link>Skills</a></li>
+            <li style="--i:3"><a href="#projects" class="nav-link" data-scroll-link>Projects</a></li>
+            <li style="--i:4"><a href="#contact" class="nav-link" data-scroll-link>Contact</a></li>
+        </ul>
+        <div class="mobile-nav__footer" style="--i:5">
+            <a href="https://github.com/YakirShlomo" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/yakir-shlomo/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:shlomoyakir00@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="nav-scrim" id="nav-scrim" aria-hidden="true"></div>
+
+    <main>
+    <!-- Hero -->
     <section id="home" class="hero">
-        <div class="video-background">
-            <!-- Background video -->
-            <video autoplay muted loop playsinline class="project-video">
+        <div class="hero__media" aria-hidden="true">
+            <video autoplay muted loop playsinline class="hero__video" poster="">
                 <source src="images/World-Live-Background.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
-            <div class="video-overlay"></div>
+            <div class="hero__veil"></div>
         </div>
-        
-        <div class="hero-content">
-            <h1 id="hello-im-yakir-shlomo" class="typing-text">
-                Hello, I'm Yakir Shlomo
+
+        <div class="hero__content">
+            <p class="hero__eyebrow reveal" data-reveal>
+                <span class="dot"></span> Available for work · Israel
+            </p>
+
+            <h1 class="hero__title">
+                <span class="line"><span data-hero-line>Yakir Shlomo</span></span>
+                <span class="line line--accent"><span data-hero-line>builds for web &amp; games.</span></span>
             </h1>
-            <p>Web & Game Developer | Full Stack Developer | Unreal Engine 5</p>
-            
-            <div class="cta-buttons">
-                <a href="#projects" class="btn primary">View Projects</a>
-                <button class="btn secondary" id="resume-button"> <i class="fa-regular fa-file-lines"></i> View Resume </button>
+
+            <p class="hero__subtitle reveal" data-reveal>
+                Full-stack developer &amp; Unreal&nbsp;Engine&nbsp;5 creator. Software engineering student turning curiosity into shippable products.
+            </p>
+
+            <div class="hero__cta reveal" data-reveal>
+                <a href="#projects" class="btn btn--primary magnetic" data-scroll-link data-magnetic>
+                    <span class="btn__label">View projects</span>
+                    <span class="btn__icon"><i class="fa-solid fa-arrow-down"></i></span>
+                </a>
+                <button class="btn btn--ghost magnetic" id="resume-button" data-magnetic>
+                    <span class="btn__label"><i class="fa-regular fa-file-lines"></i> Résumé</span>
+                </button>
             </div>
         </div>
 
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <span style="display: block; margin-bottom: 4px;">Scroll Down</span>
-            <div><i class="fa-solid fa-angle-down fa-bounce"></i></div>
-        </div>
-        
+        <a href="#about" class="hero__scroll" data-scroll-link aria-label="Scroll to about">
+            <span class="hero__scroll-line"><span></span></span>
+            <span class="hero__scroll-text">Scroll</span>
+        </a>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="content-section fade-in">
-        <h2>About Me</h2>
+    <!-- Marquee strip -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+            <span>React</span><span class="sep">/</span><span>Node.js</span><span class="sep">/</span><span>Express</span><span class="sep">/</span><span>MongoDB</span><span class="sep">/</span><span>C++</span><span class="sep">/</span><span>Python</span><span class="sep">/</span><span>Unreal Engine 5</span><span class="sep">/</span><span>Blender</span><span class="sep">/</span><span>JavaScript</span><span class="sep">/</span><span>HTML5</span><span class="sep">/</span><span>CSS3</span><span class="sep">/</span>
+            <span>React</span><span class="sep">/</span><span>Node.js</span><span class="sep">/</span><span>Express</span><span class="sep">/</span><span>MongoDB</span><span class="sep">/</span><span>C++</span><span class="sep">/</span><span>Python</span><span class="sep">/</span><span>Unreal Engine 5</span><span class="sep">/</span><span>Blender</span><span class="sep">/</span><span>JavaScript</span><span class="sep">/</span><span>HTML5</span><span class="sep">/</span><span>CSS3</span><span class="sep">/</span>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="section section--about">
+        <div class="section__head">
+            <span class="section__index">01</span>
+            <h2 class="section__title reveal" data-reveal>About me</h2>
+        </div>
+
         <div class="about-grid">
-            <div class="about-text">
-                <p>Hello, I'm Yakir Shlomo, a second-year software engineering student at SCE College. My passion for computers began as a child, always curious about how websites, games, and technologies were created. I often wondered if I could build these things myself, and that curiosity drove me to learn and experiment independently.</p>
-
-                <p>This website showcases the projects I've developed so far, providing a glimpse into my passion for development. I am driven by the desire to deepen my knowledge, enhance my skills, and bring my ideas to fruition.</p>
-
-                <p>My goals are to grow into a skilled Full Stack Developer capable of creating responsive and efficient web applications, as well as becoming a creative Game Developer who designs immersive and engaging gaming experiences. I see these two fields as a perfect combination of creativity and planning, and I strive to excel in both while finding ways to integrate them seamlessly.</p>
-
-                <p>I believe that if you like a certain field of interest, go with it as far as possible and continuously develop your skills, thinking, and abilities. Therefore, I'm always looking for ways to improve and know as much as possible. "Knowledge is power."</p>
-
-                <p>If you're looking for someone dedicated, creative, and passionate about the profession, take a look through my projects, and let's get in touch!</p>
-                
-               <!---
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">X+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">Y+</span>
-                        <span class="stat-label">Projects Completed</span>
-                    </div>
+            <div class="about-copy">
+                <p class="about-lead reveal" data-reveal>
+                    I'm Yakir Shlomo, a second-year software engineering student at SCE College. My fascination with computers started early — always wondering how the websites, games and tools I used were actually made, then trying to build them myself.
+                </p>
+                <div class="about-text" data-reveal-children>
+                    <p>This site is where I keep the projects I've shipped so far — a working snapshot of what I care about. I'm driven by deepening what I know, sharpening how I build, and getting ideas all the way to done.</p>
+                    <p>The goal: grow into a full-stack developer who builds responsive, efficient web apps, and a game developer who designs immersive, engaging experiences — and find the seams where those two worlds meet.</p>
+                    <p>My approach is simple. Find a field you genuinely like, then push it as far as you can — keep developing your skills, your thinking, your range. "Knowledge is power."</p>
+                    <p>If you're after someone dedicated, creative and serious about the craft — look through the projects below, then let's talk.</p>
                 </div>
-                -->
+
+                <ul class="about-facts" data-reveal-children>
+                    <li><span class="k">Focus</span><span class="v">Full-stack web · Game dev</span></li>
+                    <li><span class="k">Studying</span><span class="v">Software Engineering · SCE College</span></li>
+                    <li><span class="k">Stack</span><span class="v">React · Node · MongoDB · Unreal&nbsp;5</span></li>
+                    <li><span class="k">Based in</span><span class="v">Israel</span></li>
+                </ul>
             </div>
-            <div class="about-image">
-                <img src="images/picture of my self.png" alt="My Profile" class="profile-image">
+
+            <div class="about-portrait reveal" data-reveal>
+                <div class="about-portrait__frame" data-tilt>
+                    <img src="images/picture of my self.png" alt="Portrait of Yakir Shlomo" loading="lazy">
+                    <span class="about-portrait__glow" aria-hidden="true"></span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Add only when I'm at 50 percent -->
-    <!-- Course Progress Section --> 
-
-<!-- 
-
-    <section id="course-progress" class="content-section fade-in">
-        <h2>Course Progress</h2>
-        <div class="course-progress-container">
-            
-            <div class="course-progress">
-                <svg class="progress-ring" width="120" height="120">
-                    <circle class="progress-ring__circle" stroke="var(--primary-color)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
-                </svg>
-                <div class="progress-ring__text">50%</div>
-                <div class="course-details">
-                    <h3>Unreal Engine 5 C++ Developer</h3>
-                    <a href="https://www.udemy.com/course/unrealcourse/?couponCode=BFCPSALE24" target="_blank">View Course</a>
-                </div>
-            </div>
-
-           
-            <div class="course-progress">
-                <svg class="progress-ring" width="120" height="120">
-                    <circle class="progress-ring__circle" stroke="var(--primary-color)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
-                </svg>
-                <div class="progress-ring__text">50%</div>
-                <div class="course-details">
-                    <h3>Unreal Engine 5 C++ Multiplayer</h3>
-                    <a href="https://www.udemy.com/course/unreal-engine-5-multiplayer/?couponCode=BFCPSALE24" target="_blank">View Course</a>
-                </div>
-            </div>
-
-           
-            <div class="course-progress">
-                <svg class="progress-ring" width="120" height="120">
-                    <circle class="progress-ring__circle" stroke="var(--secondary-color)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
-                </svg>
-                <div class="progress-ring__text">50%</div>
-                <div class="course-details">
-                    <h3>Complete Blender Megacourse</h3>
-                    <a href="https://www.udemy.com/course/complete-blender-megacourse-beginner-to-expert/?couponCode=BFCPSALE24" target="_blank">View Course</a>
-                </div>
-            </div>
-
-            
+    <!-- Skills -->
+    <section id="skills" class="section section--skills">
+        <div class="section__head">
+            <span class="section__index">02</span>
+            <h2 class="section__title reveal" data-reveal>Skills &amp; tools</h2>
         </div>
-    </section>
 
--->
-
-    <!-- Skills Section -->
-    <section id="skills" class="content-section fade-in">
-        <h2>My Skills</h2>
-        
-        <!-- Category Navigation Buttons (Visible on Desktop) -->
-        <div class="skill-categories">
-            <button class="category-btn active" data-category="All">All</button>
-            <button class="category-btn" data-category="Programming Languages">Programming Languages</button>
-            <button class="category-btn" data-category="Web Development">Web Development</button>
-            <button class="category-btn" data-category="Design Tools">Design Tools</button>
-            <button class="category-btn" data-category="Game Development">Game Development</button>
-            <button class="category-btn" data-category="Operating Systems">Operating Systems</button>
-            <button class="category-btn" data-category="Development Tools">Development Tools</button>
-            <button class="category-btn" data-category="Version Control">Version Control</button>
-            <button class="category-btn" data-category="AI Tools">AI Tools</button>
+        <div class="skill-categories reveal" data-reveal>
+            <button class="chip is-active" data-category="All">All</button>
+            <button class="chip" data-category="Programming Languages">Languages</button>
+            <button class="chip" data-category="Web Development">Web</button>
+            <button class="chip" data-category="Design Tools">Design</button>
+            <button class="chip" data-category="Game Development">Game</button>
+            <button class="chip" data-category="Operating Systems">OS</button>
+            <button class="chip" data-category="Development Tools">Dev tools</button>
+            <button class="chip" data-category="Version Control">Version control</button>
+            <button class="chip" data-category="AI Tools">AI</button>
         </div>
-        
-        <!-- Selection Bar for Mobile -->
-        <div class="skill-selection-mobile">
-            <select id="skill-category-select">
+
+        <div class="skill-select-mobile reveal" data-reveal>
+            <select id="skill-category-select" aria-label="Filter skills by category">
                 <option value="All">All</option>
-                <option value="Programming Languages">Programming Languages</option>
-                <option value="Web Development">Web Development</option>
-                <option value="Design Tools">Design Tools</option>
-                <option value="Game Development">Game Development</option>
-                <option value="Operating Systems">Operating Systems</option>
-                <option value="Development Tools">Development Tools</option>
-                <option value="Version Control">Version Control</option>
-                <option value="AI Tools">AI Tools</option>
+                <option value="Programming Languages">Languages</option>
+                <option value="Web Development">Web</option>
+                <option value="Design Tools">Design</option>
+                <option value="Game Development">Game</option>
+                <option value="Operating Systems">OS</option>
+                <option value="Development Tools">Dev tools</option>
+                <option value="Version Control">Version control</option>
+                <option value="AI Tools">AI</option>
             </select>
         </div>
-        
-        <!-- Skills Grid -->
-        <div class="skills-grid">
-            <!-- Example Skill Item -->
+
+        <div class="skills-grid" data-reveal-children>
             <div class="skill-item" data-category="Programming Languages">
-                <img src="https://avatars.githubusercontent.com/u/13841574?v=4" alt="C++" class = "skill-icon">
+                <img src="https://avatars.githubusercontent.com/u/13841574?v=4" alt="C++" class="skill-icon" loading="lazy">
                 <span>C++</span>
             </div>
             <div class="skill-item" data-category="Programming Languages">
-                <img src="https://www.topsinfosolutions.com/wp-content/uploads/2024/07/python-development-icon.webp" alt="Python" class = "skill-icon">
-                <span>Python</span>           
+                <img src="https://www.topsinfosolutions.com/wp-content/uploads/2024/07/python-development-icon.webp" alt="Python" class="skill-icon" loading="lazy">
+                <span>Python</span>
             </div>
-
             <div class="skill-item" data-category="Web Development">
-                <img src="https://cdn.iconscout.com/icon/free/png-256/free-html-5-logo-icon-download-in-svg-png-gif-file-formats--programming-langugae-language-pack-logos-icons-1175208.png?f=webp&w=256" alt="HTML" class="skill-icon">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-html-5-logo-icon-download-in-svg-png-gif-file-formats--programming-langugae-language-pack-logos-icons-1175208.png?f=webp&w=256" alt="HTML5" class="skill-icon" loading="lazy">
                 <span>HTML5</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://logodownload.org/wp-content/uploads/2022/04/javascript-logo.png" alt="JavaScript" class = "skill-icon">         
-                 <span>JavaScript</span>
+                <img src="https://logodownload.org/wp-content/uploads/2022/04/javascript-logo.png" alt="JavaScript" class="skill-icon" loading="lazy">
+                <span>JavaScript</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/1200px-CSS3_logo.svg.png" alt="CSS3" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/1200px-CSS3_logo.svg.png" alt="CSS3" class="skill-icon" loading="lazy">
                 <span>CSS3</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="skill-icon" loading="lazy">
                 <span>React</span>
             </div>
-            
             <div class="skill-item" data-category="Web Development">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="skill-icon" loading="lazy">
                 <span>Node.js</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://ajeetchaulagain.com/static/7cb4af597964b0911fe71cb2f8148d64/87351/express-js.png" alt="Express.js" class = "skill-icon">                
+                <img src="https://ajeetchaulagain.com/static/7cb4af597964b0911fe71cb2f8148d64/87351/express-js.png" alt="Express.js" class="skill-icon" loading="lazy">
                 <span>Express.js</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://www.mongodb.com/assets/images/global/leaf.png" alt="MongoDB" class = "skill-icon">                
+                <img src="https://www.mongodb.com/assets/images/global/leaf.png" alt="MongoDB" class="skill-icon" loading="lazy">
                 <span>MongoDB</span>
             </div>
             <div class="skill-item" data-category="Web Development">
-                <img src="https://miro.medium.com/v2/resize:fit:434/0*5jMZkyb7QjJqwj0B" alt="RESTful API" class = "skill-icon">                
+                <img src="https://miro.medium.com/v2/resize:fit:434/0*5jMZkyb7QjJqwj0B" alt="RESTful API" class="skill-icon" loading="lazy">
                 <span>RESTful API</span>
             </div>
-
             <div class="skill-item" data-category="Design Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1051px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1051px-Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator" class="skill-icon" loading="lazy">
                 <span>Illustrator</span>
             </div>
             <div class="skill-item" data-category="Design Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1051px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1051px-Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop" class="skill-icon" loading="lazy">
                 <span>Photoshop</span>
             </div>
             <div class="skill-item" data-category="Design Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/1200px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Premiere Pro" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/1200px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Adobe Premiere Pro" class="skill-icon" loading="lazy">
                 <span>Premiere Pro</span>
             </div>
             <div class="skill-item" data-category="Design Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/1200px-Adobe_After_Effects_CC_icon.svg.png" alt="After Effects" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/1200px-Adobe_After_Effects_CC_icon.svg.png" alt="Adobe After Effects" class="skill-icon" loading="lazy">
                 <span>After Effects</span>
             </div>
-
             <div class="skill-item" data-category="Game Development">
-                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/ue4editor-icon.png" alt="Unreal Engine 5" class = "skill-icon">
+                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/ue4editor-icon.png" alt="Unreal Engine 5" class="skill-icon" loading="lazy">
                 <span>Unreal Engine 5</span>
             </div>
             <div class="skill-item" data-category="Game Development">
-                <img src="https://cdn.iconscout.com/icon/free/png-256/free-blender-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-vol-1-pack-logos-icons-3029884.png?f=webp&w=256" alt="Blender" class = "skill-icon">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-blender-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-vol-1-pack-logos-icons-3029884.png?f=webp&w=256" alt="Blender" class="skill-icon" loading="lazy">
                 <span>Blender</span>
             </div>
-
             <div class="skill-item" data-category="Operating Systems">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/1200px-Icons8_flat_linux.svg.png" alt="Linux" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/1200px-Icons8_flat_linux.svg.png" alt="Linux" class="skill-icon" loading="lazy">
                 <span>Linux</span>
             </div>
-
             <div class="skill-item" data-category="Development Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1024px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1024px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code" class="skill-icon" loading="lazy">
                 <span>VS Code</span>
             </div>
             <div class="skill-item" data-category="Development Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Clion.svg/640px-Clion.svg.png" alt="Clion" class = "skill-icon">                
-                <span>Clion</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Clion.svg/640px-Clion.svg.png" alt="CLion" class="skill-icon" loading="lazy">
+                <span>CLion</span>
             </div>
             <div class="skill-item" data-category="Development Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/1024px-PyCharm_Icon.svg.png" alt="PyCharm" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/1024px-PyCharm_Icon.svg.png" alt="PyCharm" class="skill-icon" loading="lazy">
                 <span>PyCharm</span>
             </div>
             <div class="skill-item" data-category="Version Control">
-                <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" class = "skill-icon">                
+                <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" class="skill-icon" loading="lazy">
                 <span>Git</span>
             </div>
             <div class="skill-item" data-category="Version Control">
-                <img src="https://cdn0.iconfinder.com/data/icons/shift-logotypes/32/Github-512.png" alt="GitHub" class = "skill-icon">                  
+                <img src="https://cdn0.iconfinder.com/data/icons/shift-logotypes/32/Github-512.png" alt="GitHub" class="skill-icon" loading="lazy">
                 <span>GitHub</span>
             </div>
             <div class="skill-item" data-category="AI Tools">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" alt="ChatGPT" class = "skill-icon">                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" alt="ChatGPT" class="skill-icon" loading="lazy">
                 <span>ChatGPT</span>
             </div>
         </div>
     </section>
 
+    <!-- Projects -->
+    <section id="projects" class="section section--projects">
+        <div class="section__head">
+            <span class="section__index">03</span>
+            <h2 class="section__title reveal" data-reveal>Selected work</h2>
+        </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="content-section fade-in">
-        <h2>Projects</h2>
-        <div class="projects-grid">
-            <!--Project 1-->
-            <article class="project-card">
-                <div class="project-image">
-                    <video autoplay muted loop playsinline class="project-video">
+        <div class="projects-grid" data-reveal-children>
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__media">
+                    <video autoplay muted loop playsinline preload="metadata">
                         <source src="images/Project1-Video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
+                    <span class="project-card__tag">Web</span>
                 </div>
-                <div class="project-content">
-                    <h3>This Website</h3>
-                    <p>This website serves as a professional and responsive portfolio, crafted using HTML5, CSS3, and JavaScript.
-                        It elegantly showcases my skills, the projects I've developed, and my professional experience.
-                        Key features include a dynamic video background in the hero section, skill filtering options, seamless navigation, and full mobile responsiveness, ensuring an exceptional user experience across all devices.
-                    </p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">CSS3</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/YakirShlomo/Yakir-Shlomo-WebSite" class="btn small secondary">Source Code</a>
+                <div class="project-card__body">
+                    <h3>This portfolio</h3>
+                    <p>A responsive personal site built from scratch — animated hero, scroll-driven reveals, filterable skills and 3D project cards. Designed for a calm, fast experience on any device.</p>
+                    <ul class="tech-stack">
+                        <li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://github.com/YakirShlomo/Yakir-Shlomo-WebSite" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Source code
+                        </a>
                     </div>
                 </div>
             </article>
-            <!-- Project 2 -->
-            <article class="project-card">
-                <div class="project-image">
-                    <video autoplay muted loop playsinline class="project-video" id="star-wars-video">
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__media">
+                    <video autoplay muted loop playsinline preload="metadata">
                         <source src="images/360p_60FPS_Final_Video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
+                    <span class="project-card__tag">Cinematic</span>
                 </div>
-                <div class="project-content">
-                    <h3>Iconic scene from "Star Wars"</h3>
-                    <p>A recreation of an iconic scene from "Star Wars," combining knowledge with an emphasis on design details and a strong visual story.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Unreal Engine 5</span>
-                        <span class="tech-tag">Blender</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/YakirShlomo/StarWars-Cinematic-Scene" class="btn small secondary">Source Code</a>
+                <div class="project-card__body">
+                    <h3>Star Wars — iconic scene</h3>
+                    <p>A real-time recreation of a classic Star Wars moment, focused on lighting, composition and the small details that carry a visual story.</p>
+                    <ul class="tech-stack">
+                        <li>Unreal Engine 5</li><li>Blender</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://github.com/YakirShlomo/StarWars-Cinematic-Scene" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Source code
+                        </a>
                     </div>
                 </div>
             </article>
-            <!-- Project 3 -->
-            <article class="project-card">
-                <div class="project-image">
-                    <video autoplay muted loop playsinline class="project-video" id="star-wars-video">
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__media">
+                    <video autoplay muted loop playsinline preload="metadata">
                         <source src="images/Tula-Eventor.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
+                    <span class="project-card__tag">Full-stack</span>
                 </div>
-                <div class="project-content">
+                <div class="project-card__body">
                     <h3>Tula-Eventor</h3>
-                    <p>Tula-Eventor is a modern event management application designed to simplify event planning and organization. With an intuitive interface, users can easily create, manage, and track events in real time. The platform supports seamless scheduling, user authentication, and interactive tools for seamless coordination. Built with powerful technologies, Tula-Eventor ensures a reliable and efficient experience for both organizers and attendees.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://tula-eventor.onrender.com/" class="btn small secondary">Visit WebSite</a>
+                    <p>An event-management app that makes planning and tracking events straightforward — real-time scheduling, user authentication and a clean interface for organizers and attendees alike.</p>
+                    <ul class="tech-stack">
+                        <li>React</li><li>Node.js</li><li>Express</li><li>MongoDB</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://tula-eventor.onrender.com/" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit site
+                        </a>
                     </div>
                 </div>
             </article>
-            <!-- Add more project cards as needed -->
         </div>
     </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="content-section fade-in">
-        <h2>Get In Touch</h2>
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <p>Interested in working together? Let's connect!</p>
-                <div class="social-links">
-                    <a href="mailto:shlomoyakir00@gmail.com" class="social-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>shlomoyakir00@gmail.com</span>
-                    </a>
-                    <a href="https://wa.me/972524642361" class="social-link" target="_blank">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        <span>Whatsapp</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/yakir-shlomo/" class="social-link" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/YakirShlomo" class="social-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
-    </section>
-        
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>© 2024 Yakir Shlomo. All rights reserved.</p>
+    <!-- Contact -->
+    <section id="contact" class="section section--contact">
+        <div class="section__head">
+            <span class="section__index">04</span>
+            <h2 class="section__title reveal" data-reveal>Get in touch</h2>
+        </div>
+
+        <div class="contact-inner">
+            <p class="contact-lead reveal" data-reveal>
+                Have a project in mind, a role to fill, or just want to talk shop?
+                <a href="mailto:shlomoyakir00@gmail.com" class="contact-mail">Send me a message <i class="fa-solid fa-arrow-right"></i></a>
+            </p>
+
+            <ul class="contact-links" data-reveal-children>
+                <li>
+                    <a href="mailto:shlomoyakir00@gmail.com" class="contact-row">
+                        <span class="contact-row__icon"><i class="fas fa-envelope"></i></span>
+                        <span class="contact-row__label">Email</span>
+                        <span class="contact-row__value">shlomoyakir00@gmail.com</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/972524642361" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fa-brands fa-whatsapp"></i></span>
+                        <span class="contact-row__label">WhatsApp</span>
+                        <span class="contact-row__value">+972 52-464-2361</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/yakir-shlomo/" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fab fa-linkedin"></i></span>
+                        <span class="contact-row__label">LinkedIn</span>
+                        <span class="contact-row__value">in/yakir-shlomo</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/YakirShlomo" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fab fa-github"></i></span>
+                        <span class="contact-row__label">GitHub</span>
+                        <span class="contact-row__value">@YakirShlomo</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__big" aria-hidden="true">Yakir Shlomo</div>
+        <div class="footer__bar">
+            <p>&copy; <span id="year">2024</span> Yakir Shlomo. Built with HTML, CSS &amp; JavaScript.</p>
+            <a href="#home" class="footer__top" data-scroll-link>Back to top <i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </footer>
 
-    <!-- JavaScript File -->
+    <!-- Résumé modal -->
+    <div class="resume-modal" id="resume-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Résumé">
+        <div class="resume-modal__panel">
+            <button class="resume-modal__close" id="resume-close" aria-label="Close résumé">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <object id="resume-object" type="application/pdf" aria-label="Yakir Shlomo résumé">
+                <a href="images/Yakir Nissim Shlomo Resume.pdf" download>Download résumé (PDF)</a>
+            </object>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
