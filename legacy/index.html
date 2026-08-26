@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yakir Shlomo — Full-Stack Developer building production web platforms with React, Next.js, Node.js and Supabase. Software engineering student. Portfolio of projects, skills and experience.">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta property="og:title" content="Yakir Shlomo | Full-Stack Developer">
+    <meta property="og:description" content="Full-Stack Developer · React · Next.js · Node.js · Supabase">
+    <meta property="og:type" content="website">
+    <title>Yakir Shlomo | Full-Stack Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+    <script>
+        document.documentElement.classList.add('js');
+        /* Always land on the Hero on load/refresh — never let the browser
+           restore a previous scroll position (bfcache, session history). */
+        if ('scrollRestoration' in history) {
+            try { history.scrollRestoration = 'manual'; } catch (e) { /* noop */ }
+        }
+        window.scrollTo(0, 0);
+    </script>
+    <noscript><style>.gate{display:none!important}</style></noscript>
+</head>
+<body>
+    <!-- Entry gate — type /start to unlock. Hidden by default; only activated when .js is present, so the site is fully usable with JS disabled. -->
+    <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Enter the portfolio">
+        <div class="gate__glow" aria-hidden="true"></div>
+        <div class="gate__inner">
+            <span class="gate__mark" aria-hidden="true">YS</span>
+            <h1 class="gate__title">Yakir Shlomo</h1>
+            <p class="gate__hint">Type <code>/start</code> to enter</p>
+            <form class="gate__form" id="gate-form" autocomplete="off">
+                <label for="gate-input" class="sr-only">Type /start to enter the portfolio</label>
+                <input type="text" class="gate__input" id="gate-input" name="gate-command" placeholder="/start" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+                <button type="submit" class="gate__submit" aria-label="Enter">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+            <p class="gate__error" id="gate-error" role="alert" aria-live="polite"></p>
+        </div>
+    </div>
+    <div class="gate__flash" id="gate-flash" aria-hidden="true"></div>
+
+    <!-- Scroll progress bar (scroll-driven CSS animation, JS fallback) -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Background ambient grain + glow -->
+    <div class="bg-fx" aria-hidden="true">
+        <div class="bg-glow bg-glow--a"></div>
+        <div class="bg-glow bg-glow--b"></div>
+        <div class="bg-grain"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="navbar" id="navbar">
+        <a href="#home" class="nav-brand" data-scroll-link>
+            <span class="nav-brand__mark">YS</span>
+            <span class="nav-brand__text">Yakir&nbsp;Shlomo</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+            <ul>
+                <li><a href="#home" class="nav-link" data-scroll-link><span>Home</span></a></li>
+                <li><a href="#about" class="nav-link" data-scroll-link><span>About</span></a></li>
+                <li><a href="#skills" class="nav-link" data-scroll-link><span>Skills</span></a></li>
+                <li><a href="#projects" class="nav-link" data-scroll-link><span>Projects</span></a></li>
+                <li><a href="#contact" class="nav-link" data-scroll-link><span>Contact</span></a></li>
+            </ul>
+        </nav>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+        </button>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true" inert>
+        <ul>
+            <li style="--i:0"><a href="#home" class="nav-link" data-scroll-link>Home</a></li>
+            <li style="--i:1"><a href="#about" class="nav-link" data-scroll-link>About</a></li>
+            <li style="--i:2"><a href="#skills" class="nav-link" data-scroll-link>Skills</a></li>
+            <li style="--i:3"><a href="#projects" class="nav-link" data-scroll-link>Projects</a></li>
+            <li style="--i:4"><a href="#contact" class="nav-link" data-scroll-link>Contact</a></li>
+        </ul>
+        <div class="mobile-nav__footer" style="--i:5">
+            <a href="https://github.com/YakirShlomo" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/yakir-shlomo/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:shlomoyakir00@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="nav-scrim" id="nav-scrim" aria-hidden="true"></div>
+
+    <main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero__media" aria-hidden="true">
+            <canvas id="hero-canvas" class="hero__canvas"></canvas>
+            <div class="hero__veil"></div>
+        </div>
+
+        <div class="hero__content">
+            <div class="hero__float">
+                <p class="hero__eyebrow reveal" data-reveal>
+                    <span class="dot"></span> Available for work · Israel
+                </p>
+
+                <h1 class="hero__title">
+                    <span class="line"><span data-hero-line data-glitch-text>Yakir Shlomo</span></span>
+                    <span class="line line--accent"><span data-hero-line data-scramble>Full-stack developer.</span></span>
+                </h1>
+
+                <ul class="hero__meta" data-reveal-children>
+                    <li data-magnetic><i class="fa-solid fa-layer-group" aria-hidden="true"></i> React · Next.js · Node.js · Supabase</li>
+                    <li data-magnetic><i class="fa-solid fa-rocket" aria-hidden="true"></i> 5 platforms shipped</li>
+                </ul>
+            </div>
+
+            <div class="hero__cta reveal" data-reveal>
+                <a href="#projects" class="btn btn--primary magnetic" data-scroll-link data-magnetic>
+                    <span class="btn__label">View projects</span>
+                    <span class="btn__icon"><i class="fa-solid fa-arrow-down"></i></span>
+                </a>
+                <a href="#contact" class="btn btn--ghost magnetic" data-scroll-link data-magnetic>
+                    <span class="btn__label"><i class="fa-regular fa-paper-plane"></i> Get in touch</span>
+                </a>
+            </div>
+        </div>
+
+        <a href="#about" class="hero__scroll" data-scroll-link aria-label="Scroll to about">
+            <span class="hero__scroll-line"><span></span></span>
+            <span class="hero__scroll-text">Scroll</span>
+        </a>
+    </section>
+
+    <!-- Marquee strip -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+            <span>React</span><span class="sep">/</span><span>Next.js</span><span class="sep">/</span><span>TypeScript</span><span class="sep">/</span><span>Node.js</span><span class="sep">/</span><span>Supabase</span><span class="sep">/</span><span>PostgreSQL</span><span class="sep">/</span><span>MongoDB</span><span class="sep">/</span><span>AWS&nbsp;S3</span><span class="sep">/</span><span>Tailwind&nbsp;CSS</span><span class="sep">/</span><span>Redis</span><span class="sep">/</span><span>REST&nbsp;APIs</span><span class="sep">/</span>
+            <span>React</span><span class="sep">/</span><span>Next.js</span><span class="sep">/</span><span>TypeScript</span><span class="sep">/</span><span>Node.js</span><span class="sep">/</span><span>Supabase</span><span class="sep">/</span><span>PostgreSQL</span><span class="sep">/</span><span>MongoDB</span><span class="sep">/</span><span>AWS&nbsp;S3</span><span class="sep">/</span><span>Tailwind&nbsp;CSS</span><span class="sep">/</span><span>Redis</span><span class="sep">/</span><span>REST&nbsp;APIs</span><span class="sep">/</span>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="section section--about">
+        <div class="section__head">
+            <span class="section__index">01</span>
+            <h2 class="section__title reveal" data-reveal>About me</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-copy">
+                <p class="about-lead reveal" data-reveal>
+                    I'm Yakir Shlomo, a fourth-year software engineering student at SCE College. My fascination with computers started early — always wondering how the websites, games and tools I used were actually made, then trying to build them myself.
+                </p>
+                <div class="about-text" data-reveal-children>
+                    <p>This site is where I keep the projects I've shipped so far — a working snapshot of what I care about. I'm driven by deepening what I know, sharpening how I build, and getting ideas all the way to done.</p>
+                    <p>The goal: grow into a full-stack developer who builds responsive, efficient web apps, and a game developer who designs immersive, engaging experiences — and find the seams where those two worlds meet.</p>
+                    <p>My approach is simple. Find a field you genuinely like, then push it as far as you can — keep developing your skills, your thinking, your range. "Knowledge is power."</p>
+                    <p>If you're after someone dedicated, creative and serious about the craft — look through the projects below, then let's talk.</p>
+                </div>
+
+                <ul class="about-facts" data-reveal-children>
+                    <li><span class="k">Focus</span><span class="v">Full-stack web · Game dev</span></li>
+                    <li><span class="k">Studying</span><span class="v">Software Engineering · SCE College</span></li>
+                    <li><span class="k">Stack</span><span class="v">React · Node · MongoDB · Unreal&nbsp;5</span></li>
+                    <li><span class="k">Based in</span><span class="v">Israel</span></li>
+                </ul>
+            </div>
+
+            <div class="about-portrait reveal" data-reveal>
+                <div class="about-portrait__frame" data-tilt>
+                    <img src="images/picture of my self.png" alt="Portrait of Yakir Shlomo" loading="lazy">
+                    <span class="about-portrait__glow" aria-hidden="true"></span>
+                </div>
+                <button class="btn btn--ghost about-portrait__resume magnetic" data-resume-trigger data-magnetic>
+                    <span class="btn__label"><i class="fa-regular fa-file-lines"></i> Resume</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section section--skills">
+        <div class="section__head">
+            <span class="section__index">02</span>
+            <h2 class="section__title reveal" data-reveal>Skills &amp; tools</h2>
+        </div>
+
+        <p class="skills-lead reveal" data-reveal>Grouped the way I actually use them on a project — not an alphabetical tag cloud.</p>
+
+        <div class="skill-categories reveal" data-reveal>
+            <button class="chip is-active" data-category="All">All</button>
+            <button class="chip" data-category="Frontend">Frontend</button>
+            <button class="chip" data-category="Backend">Backend &amp; APIs</button>
+            <button class="chip" data-category="Data">Data &amp; Cloud</button>
+            <button class="chip" data-category="Security">Auth &amp; Security</button>
+            <button class="chip" data-category="Systems">Systems &amp; Tools</button>
+            <button class="chip" data-category="Creative">Creative range</button>
+        </div>
+
+        <div class="skill-select-mobile reveal" data-reveal>
+            <select id="skill-category-select" aria-label="Filter skills by category">
+                <option value="All">All</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend &amp; APIs</option>
+                <option value="Data">Data &amp; Cloud</option>
+                <option value="Security">Auth &amp; Security</option>
+                <option value="Systems">Systems &amp; Tools</option>
+                <option value="Creative">Creative range</option>
+            </select>
+        </div>
+
+        <div class="skills-grid" data-reveal-children>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/react/f2f2f3" alt="React" class="skill-icon" loading="lazy">
+                <span>React</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/nextdotjs/f2f2f3" alt="Next.js" class="skill-icon" loading="lazy">
+                <span>Next.js</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/typescript/f2f2f3" alt="TypeScript" class="skill-icon" loading="lazy">
+                <span>TypeScript</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/javascript/f2f2f3" alt="JavaScript" class="skill-icon" loading="lazy">
+                <span>JavaScript</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/tailwindcss/f2f2f3" alt="Tailwind CSS" class="skill-icon" loading="lazy">
+                <span>Tailwind CSS</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/html5/f2f2f3" alt="HTML5" class="skill-icon" loading="lazy">
+                <span>HTML5</span>
+            </div>
+            <div class="skill-item" data-category="Frontend">
+                <img src="https://cdn.simpleicons.org/css/f2f2f3" alt="CSS3" class="skill-icon" loading="lazy">
+                <span>CSS3</span>
+            </div>
+
+            <div class="skill-item" data-category="Backend">
+                <img src="https://cdn.simpleicons.org/nodedotjs/f2f2f3" alt="Node.js" class="skill-icon" loading="lazy">
+                <span>Node.js</span>
+            </div>
+            <div class="skill-item" data-category="Backend">
+                <img src="https://cdn.simpleicons.org/express/f2f2f3" alt="Express.js" class="skill-icon" loading="lazy">
+                <span>Express.js</span>
+            </div>
+            <div class="skill-item" data-category="Backend">
+                <i class="fa-solid fa-plug skill-icon skill-icon--glyph" aria-hidden="true"></i>
+                <span>REST APIs</span>
+            </div>
+            <div class="skill-item" data-category="Backend">
+                <img src="https://cdn.simpleicons.org/supabase/f2f2f3" alt="Supabase Edge Functions" class="skill-icon" loading="lazy">
+                <span>Edge Functions</span>
+            </div>
+
+            <div class="skill-item" data-category="Data">
+                <img src="https://cdn.simpleicons.org/postgresql/f2f2f3" alt="PostgreSQL" class="skill-icon" loading="lazy">
+                <span>PostgreSQL</span>
+            </div>
+            <div class="skill-item" data-category="Data">
+                <img src="https://cdn.simpleicons.org/supabase/f2f2f3" alt="Supabase" class="skill-icon" loading="lazy">
+                <span>Supabase</span>
+            </div>
+            <div class="skill-item" data-category="Data">
+                <img src="https://cdn.simpleicons.org/mongodb/f2f2f3" alt="MongoDB" class="skill-icon" loading="lazy">
+                <span>MongoDB</span>
+            </div>
+            <div class="skill-item" data-category="Data">
+                <i class="fa-brands fa-aws skill-icon skill-icon--glyph" aria-hidden="true"></i>
+                <span>AWS S3</span>
+            </div>
+            <div class="skill-item" data-category="Data">
+                <img src="https://cdn.simpleicons.org/redis/f2f2f3" alt="Redis" class="skill-icon" loading="lazy">
+                <span>Redis</span>
+            </div>
+
+            <div class="skill-item" data-category="Security">
+                <i class="fa-solid fa-user-shield skill-icon skill-icon--glyph" aria-hidden="true"></i>
+                <span>Supabase Auth</span>
+            </div>
+            <div class="skill-item" data-category="Security">
+                <img src="https://cdn.simpleicons.org/jsonwebtokens/f2f2f3" alt="JWT" class="skill-icon" loading="lazy">
+                <span>JWT</span>
+            </div>
+            <div class="skill-item" data-category="Security">
+                <i class="fa-solid fa-key skill-icon skill-icon--glyph" aria-hidden="true"></i>
+                <span>OAuth2</span>
+            </div>
+            <div class="skill-item" data-category="Security">
+                <i class="fa-solid fa-shield-halved skill-icon skill-icon--glyph" aria-hidden="true"></i>
+                <span>Row-Level Security</span>
+            </div>
+
+            <div class="skill-item" data-category="Systems">
+                <img src="https://cdn.simpleicons.org/cplusplus/f2f2f3" alt="C++" class="skill-icon" loading="lazy">
+                <span>C++</span>
+            </div>
+            <div class="skill-item" data-category="Systems">
+                <img src="https://cdn.simpleicons.org/git/f2f2f3" alt="Git" class="skill-icon" loading="lazy">
+                <span>Git</span>
+            </div>
+            <div class="skill-item" data-category="Systems">
+                <img src="https://cdn.simpleicons.org/github/f2f2f3" alt="GitHub" class="skill-icon" loading="lazy">
+                <span>GitHub</span>
+            </div>
+            <div class="skill-item" data-category="Systems">
+                <img src="https://cdn.simpleicons.org/linux/f2f2f3" alt="Linux" class="skill-icon" loading="lazy">
+                <span>Linux</span>
+            </div>
+
+            <div class="skill-item" data-category="Creative">
+                <img src="https://cdn.simpleicons.org/unrealengine/f2f2f3" alt="Unreal Engine 5" class="skill-icon" loading="lazy">
+                <span>Unreal Engine 5</span>
+            </div>
+            <div class="skill-item" data-category="Creative">
+                <img src="https://cdn.simpleicons.org/blender/f2f2f3" alt="Blender" class="skill-icon" loading="lazy">
+                <span>Blender</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section section--projects">
+        <div class="section__head">
+            <span class="section__index">03</span>
+            <h2 class="section__title reveal" data-reveal>Selected work</h2>
+        </div>
+        <p class="projects-lead reveal" data-reveal>Five platforms, five different problems — multi-tenant access control, a real client-facing business site, high-volume media uploads, inventory automation and cloud infrastructure. Strongest first.</p>
+
+        <div class="projects-grid" data-reveal-children>
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__cover" aria-hidden="true">
+                    <span class="project-card__index">01</span>
+                    <i class="fa-solid fa-file-invoice-dollar project-card__glyph"></i>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__tag">SaaS · Full-stack</span>
+                        <span class="project-card__year">2026</span>
+                    </div>
+                    <h3>TaxFolder</h3>
+                    <p>A multi-tenant platform for accounting firms to manage clients, monthly financial documents and secure communication — with dedicated roles for Admins, Accountants and Clients.</p>
+                    <p class="project-card__highlight"><span class="project-card__highlight-label">Highlight</span>Three-tier role-based access with real-time chat and secure document handling, built for firms that actually run their business on it.</p>
+                    <ul class="tech-stack">
+                        <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL</li><li>Redis</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://taxfolder-omega.vercel.app/" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit site
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__cover" aria-hidden="true">
+                    <span class="project-card__index">02</span>
+                    <i class="fa-solid fa-umbrella-beach project-card__glyph"></i>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__tag">Client site · Full-stack</span>
+                    </div>
+                    <h3>Travel-With-Tal</h3>
+                    <p>A Hebrew, fully RTL marketing and booking site built for an independent travel agent — vacation packages, a client portfolio and direct lead capture, live for a real small business.</p>
+                    <p class="project-card__highlight"><span class="project-card__highlight-label">Highlight</span>Real client work, not a template: a polished, production RTL site for a business owner who now runs her lead flow through it.</p>
+                    <ul class="tech-stack">
+                        <li>React</li><li>TypeScript</li><li>Vite</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://travel-with-tal.vercel.app/" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit site
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__cover" aria-hidden="true">
+                    <span class="project-card__index">03</span>
+                    <i class="fa-regular fa-images project-card__glyph"></i>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__tag">Full-stack · Media</span>
+                        <span class="project-card__year">2025</span>
+                    </div>
+                    <h3>SnapMyWedding</h3>
+                    <p>A shared gallery for weddings and events — guests upload photos and videos straight from their phones, no app required, and everyone leaves with the full set afterward.</p>
+                    <p class="project-card__highlight"><span class="project-card__highlight-label">Highlight</span>Direct-to-S3 upload pipeline with progress tracking, retry on failure and file validation — built to survive dozens of guests uploading at once.</p>
+                    <ul class="tech-stack">
+                        <li>React</li><li>TypeScript</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>AWS&nbsp;S3</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="https://snapmywedding.onrender.com/" class="btn btn--small" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit site
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__cover" aria-hidden="true">
+                    <span class="project-card__index">04</span>
+                    <i class="fa-solid fa-boxes-stacked project-card__glyph"></i>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__tag">Full-stack · Automation</span>
+                        <span class="project-card__year">2026</span>
+                    </div>
+                    <h3>Event Inventory &amp; Automation Platform</h3>
+                    <p>A full-stack system for event businesses to manage inventory, expenses and profit — stock levels update automatically as bookings move, with a Telegram bot for on-the-go control.</p>
+                    <p class="project-card__highlight"><span class="project-card__highlight-label">Highlight</span>Automated inventory sync plus a Telegram bot and iCloud Calendar (CalDAV) integration — real operational tooling, not just a CRUD dashboard.</p>
+                    <ul class="tech-stack">
+                        <li>React</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL</li><li>Telegram&nbsp;Bot&nbsp;API</li><li>CalDAV</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="private-project.html?name=Event+Inventory+%26+Automation+Platform&tag=Full-stack+%C2%B7+Automation&stack=React%2C+TypeScript%2C+Supabase%2C+PostgreSQL%2C+Telegram+Bot+API%2C+CalDAV&note=This+was+built+for+a+client%E2%80%99s+internal+operations%2C+so+I+can%E2%80%99t+host+a+public+demo+or+share+source+access+here.+I%E2%80%99m+glad+to+walk+you+through+the+architecture+and+the+decisions+behind+it+directly." class="btn btn--small">
+                            <i class="fa-solid fa-lock"></i> Private project
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-tilt data-spotlight>
+                <div class="project-card__cover" aria-hidden="true">
+                    <span class="project-card__index">05</span>
+                    <i class="fa-solid fa-house-chimney project-card__glyph"></i>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__tag">Mobile · Cloud infra</span>
+                        <span class="project-card__year">2025</span>
+                    </div>
+                    <h3>House-Helper</h3>
+                    <p>A household management app for families — shared tasks, live shopping lists, bill tracking and durable timers, backed by a production-style cloud architecture rather than a single server.</p>
+                    <p class="project-card__highlight"><span class="project-card__highlight-label">Highlight</span>Event-driven microservices on AWS EKS with Kafka and Temporal for durable workflows — infrastructure most side projects never touch.</p>
+                    <ul class="tech-stack">
+                        <li>Flutter</li><li>Go</li><li>PostgreSQL</li><li>Kafka</li><li>Temporal</li><li>AWS&nbsp;EKS</li>
+                    </ul>
+                    <div class="project-card__links">
+                        <a href="private-project.html?name=House-Helper&tag=Mobile+%C2%B7+Cloud+infra&stack=Flutter%2C+Go%2C+PostgreSQL%2C+Kafka%2C+Temporal%2C+AWS+EKS&note=House-Helper+is+still+in+active+development+and+hasn%E2%80%99t+been+deployed+publicly+yet%2C+so+there%E2%80%99s+no+live+demo+to+share+here.+I%E2%80%99m+glad+to+walk+you+through+the+architecture+directly." class="btn btn--small">
+                            <i class="fa-solid fa-lock"></i> Private project
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="projects-secondary reveal" data-reveal>
+            <div class="projects-secondary__head">
+                <span class="projects-secondary__label">Also worth a look</span>
+                <p>Smaller or internal pieces — no public demo, but real work behind each one.</p>
+            </div>
+
+            <article class="project-row" data-tilt data-spotlight>
+                <div class="project-row__cover" aria-hidden="true">
+                    <i class="fa-solid fa-diagram-project project-card__glyph"></i>
+                </div>
+                <div class="project-row__body">
+                    <h3>Tula Build</h3>
+                    <p>An internal system in the same "Tula" product line as my event-management work — live in production, access is password-protected for its users.</p>
+                    <ul class="tech-stack">
+                        <li>React</li><li>TypeScript</li>
+                    </ul>
+                </div>
+                <a href="private-project.html?name=Tula+Build&tag=Internal+system+%C2%B7+Full-stack&stack=React%2C+TypeScript&note=Tula+Build+is+live+in+production%2C+but+it%E2%80%99s+password-protected+for+its+users%2C+so+there%E2%80%99s+no+public+demo+to+share+here.+I%E2%80%99m+glad+to+walk+you+through+it+directly." class="btn btn--small project-row__link">
+                    <i class="fa-solid fa-lock"></i> Private project
+                </a>
+            </article>
+
+            <article class="project-row" data-tilt data-spotlight>
+                <div class="project-row__cover" aria-hidden="true">
+                    <i class="fa-solid fa-layer-group project-card__glyph"></i>
+                </div>
+                <div class="project-row__body">
+                    <h3>Tula.y</h3>
+                    <p>Another piece of the Tula product line, not deployed publicly yet.</p>
+                </div>
+                <a href="private-project.html?name=Tula.y&tag=Tula+product+line&note=Tula.y+hasn%E2%80%99t+been+deployed+publicly+yet%2C+so+there%E2%80%99s+no+live+demo+to+share+here.+I%E2%80%99m+glad+to+walk+you+through+it+directly." class="btn btn--small project-row__link">
+                    <i class="fa-solid fa-lock"></i> Private project
+                </a>
+            </article>
+
+            <article class="project-row" data-tilt data-spotlight>
+                <div class="project-row__cover" aria-hidden="true">
+                    <i class="fa-solid fa-clapperboard project-card__glyph"></i>
+                </div>
+                <div class="project-row__body">
+                    <h3>Star Wars — cinematic scene</h3>
+                    <p>A real-time recreation of a classic Star Wars moment in Unreal Engine 5, focused on lighting, composition and the small details that carry a visual story.</p>
+                    <ul class="tech-stack">
+                        <li>Unreal Engine 5</li><li>Blender</li>
+                    </ul>
+                </div>
+                <a href="private-project.html?name=Star+Wars+%E2%80%94+Cinematic+Scene&tag=Unreal+Engine+5+%C2%B7+Cinematic&stack=Unreal+Engine+5%2C+Blender&note=This+is+an+Unreal+Engine+project+file+rather+than+a+web+app%2C+so+there%E2%80%99s+nothing+to+host+as+a+live+demo+here.+I%E2%80%99m+glad+to+share+a+walkthrough+video+or+the+project+directly." class="btn btn--small project-row__link">
+                    <i class="fa-solid fa-lock"></i> Private project
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section--contact">
+        <div class="section__head">
+            <span class="section__index">04</span>
+            <h2 class="section__title reveal" data-reveal>Get in touch</h2>
+        </div>
+
+        <div class="contact-inner">
+            <p class="contact-eyebrow reveal" data-reveal>
+                <span class="dot"></span> Open to full-stack roles · Available now
+            </p>
+            <p class="contact-lead reveal" data-reveal>
+                Hiring for a full-stack role? I'd love to hear from you — I read every message myself and reply within a day.
+            </p>
+
+            <div class="contact-cta reveal" data-reveal>
+                <a href="mailto:shlomoyakir00@gmail.com?subject=Full-stack%20opportunity" class="btn btn--primary magnetic" data-magnetic>
+                    <span class="btn__label"><i class="fa-solid fa-paper-plane"></i> Email me directly</span>
+                </a>
+                <button class="btn btn--ghost magnetic" data-resume-trigger data-magnetic>
+                    <span class="btn__label"><i class="fa-regular fa-file-lines"></i> Resume</span>
+                </button>
+                <span class="contact-cta__note"><i class="fa-regular fa-clock"></i> Usually replies within 24 hours</span>
+            </div>
+
+            <ul class="contact-links" data-reveal-children>
+                <li>
+                    <a href="mailto:shlomoyakir00@gmail.com" class="contact-row">
+                        <span class="contact-row__icon"><i class="fas fa-envelope"></i></span>
+                        <span class="contact-row__label">Email</span>
+                        <span class="contact-row__value">shlomoyakir00@gmail.com</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/972524642361" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fa-brands fa-whatsapp"></i></span>
+                        <span class="contact-row__label">WhatsApp</span>
+                        <span class="contact-row__value">+972 52-464-2361</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/yakir-shlomo/" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fab fa-linkedin"></i></span>
+                        <span class="contact-row__label">LinkedIn</span>
+                        <span class="contact-row__value">in/yakir-shlomo</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/YakirShlomo" class="contact-row" target="_blank" rel="noopener">
+                        <span class="contact-row__icon"><i class="fab fa-github"></i></span>
+                        <span class="contact-row__label">GitHub</span>
+                        <span class="contact-row__value">@YakirShlomo</span>
+                        <span class="contact-row__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__big" aria-hidden="true">Yakir Shlomo</div>
+        <div class="footer__bar">
+            <p>&copy; <span id="year">2024</span> Yakir Shlomo. Built with HTML, CSS &amp; JavaScript.</p>
+            <a href="#home" class="footer__top" data-scroll-link>Back to top <i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </footer>
+
+    <!-- Resume modal -->
+    <div class="resume-modal" id="resume-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Resume">
+        <div class="resume-modal__panel" tabindex="-1">
+            <div class="resume-modal__header">
+                <div class="resume-modal__heading">
+                    <span class="resume-modal__eyebrow">Resume</span>
+                    <h3>Yakir Shlomo</h3>
+                </div>
+                <div class="resume-modal__actions">
+                    <a href="images/Yakir Nissim Shlomo Resume.pdf" download class="resume-modal__download" aria-label="Download resume PDF">
+                        <i class="fa-solid fa-download" aria-hidden="true"></i>
+                        <span>Download</span>
+                    </a>
+                    <button class="resume-modal__close" id="resume-close" aria-label="Close resume">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="resume-modal__viewport">
+                <object id="resume-object" type="application/pdf" aria-label="Yakir Shlomo resume">
+                    <a href="images/Yakir Nissim Shlomo Resume.pdf" download>Download resume (PDF)</a>
+                </object>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
+    <script src="script.js?v=2"></script>
+    <script src="hero-scene.js?v=1" defer></script>
+</body>
+</html>

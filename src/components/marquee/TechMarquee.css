@@ -1,0 +1,24 @@
+.marquee {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.1rem 0;
+}
+
+.tech-loop-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-faint);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.tech-loop-item img {
+  width: 1.1em;
+  height: 1.1em;
+  object-fit: contain;
+  opacity: 0.85;
+}

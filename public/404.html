@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Yakir Shlomo</title>
+    <script>
+      // GitHub Pages has no server-side rewrites, so a hard refresh or a
+      // shared link landing on a nested route (e.g. /private-project?...)
+      // 404s before React Router ever runs. Redirect to the SPA root,
+      // carrying the intended path along as a query param it can restore.
+      var base = '/My-Portfolio/';
+      var full = location.pathname.slice(base.length) + location.search + location.hash;
+      location.replace(base + '?redirect=' + encodeURIComponent(full));
+    </script>
+  </head>
+  <body></body>
+</html>

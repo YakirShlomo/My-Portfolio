@@ -1,0 +1,123 @@
+.resume-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 3rem);
+  background: rgba(4, 4, 6, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 260ms var(--ease-out), visibility 260ms var(--ease-out);
+}
+.resume-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.resume-modal__panel {
+  width: min(880px, 100%);
+  height: min(86vh, 1000px);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-lift);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  outline: none;
+  transform: scale(0.96) translateY(8px);
+  opacity: 0;
+  transition: transform 280ms var(--ease-out), opacity 280ms var(--ease-out);
+}
+.resume-modal.is-open .resume-modal__panel {
+  transform: none;
+  opacity: 1;
+}
+
+.resume-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+.resume-modal__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.resume-modal__heading h3 {
+  font-size: 1.15rem;
+}
+.resume-modal__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.resume-modal__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
+}
+.resume-modal__download:active {
+  transform: scale(0.96);
+}
+.resume-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--fg-dim);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.resume-modal__close:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+
+.resume-modal__viewport {
+  flex: 1;
+  min-height: 0;
+  background: #1a1a1e;
+}
+.resume-modal__viewport object {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 640px) {
+  .resume-modal__panel {
+    height: 90vh;
+    border-radius: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume-modal,
+  .resume-modal__panel {
+    transition: opacity 60ms linear;
+  }
+  .resume-modal__panel {
+    transform: none;
+  }
+}

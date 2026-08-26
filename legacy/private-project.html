@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta name="description" content="This project is private — reach out to Yakir Shlomo directly for a walkthrough.">
+    <title>Private project | Yakir Shlomo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+    <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="private-page">
+    <div class="bg-fx" aria-hidden="true">
+        <div class="bg-glow bg-glow--a"></div>
+        <div class="bg-glow bg-glow--b"></div>
+        <div class="bg-grain"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand__mark">YS</span>
+            <span class="nav-brand__text">Yakir&nbsp;Shlomo</span>
+        </a>
+        <a href="index.html#projects" class="btn btn--ghost btn--small">
+            <i class="fa-solid fa-arrow-left"></i> All projects
+        </a>
+    </header>
+
+    <main>
+        <section class="private-hero">
+            <div class="private-hero__icon reveal" data-reveal aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="14" y="28" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2"/>
+                    <path d="M22 28V20a10 10 0 0 1 20 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="32" cy="40" r="3.2" fill="currentColor"/>
+                    <path d="M32 43.2V48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <p class="private-hero__eyebrow reveal" data-reveal>
+                <span class="dot"></span> Private access
+            </p>
+
+            <h1 class="private-hero__title reveal" data-reveal id="private-project-title">This project is private</h1>
+
+            <p class="private-hero__body reveal" data-reveal id="private-project-note">
+                There's no public demo for this one right now, so I can't link out to it here. I'm glad to walk you through the architecture, the decisions behind it, and the code directly — just reach out.
+            </p>
+
+            <ul class="private-hero__stack reveal" data-reveal id="private-project-stack" aria-label="Technologies used"></ul>
+
+            <div class="private-hero__cta reveal" data-reveal>
+                <a href="index.html#projects" class="btn btn--primary magnetic" data-magnetic>
+                    <span class="btn__label">Back to portfolio</span>
+                </a>
+                <a href="index.html#contact" class="btn btn--ghost magnetic" data-magnetic>
+                    <span class="btn__label"><i class="fa-regular fa-paper-plane"></i> Ask me about it</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer footer--minimal">
+        <div class="footer__bar">
+            <p>&copy; <span id="year">2024</span> Yakir Shlomo.</p>
+            <div class="private-footer-links">
+                <a href="mailto:shlomoyakir00@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/yakir-shlomo/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/YakirShlomo" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>

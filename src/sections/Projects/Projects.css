@@ -1,0 +1,215 @@
+.projects-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.projects-grid {
+  column-count: 2;
+  column-gap: 1.5rem;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+.projects-grid__item,
+.projects-grid__featured {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+.projects-grid__featured {
+  column-span: all;
+}
+
+.projects-grid .project-card,
+.project-row {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 0;
+  transition: border-color 240ms ease, transform 240ms var(--ease-out);
+}
+.projects-grid .project-card:hover,
+.project-row:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+}
+
+.project-card--featured {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+}
+
+.project-card__cover {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.75rem;
+  min-height: 9rem;
+  color: var(--accent);
+  background: linear-gradient(155deg, var(--surface-2), var(--surface));
+  border-bottom: 1px solid var(--line);
+}
+.project-card--featured .project-card__cover {
+  border-bottom: none;
+  border-right: 1px solid var(--line);
+}
+.project-card__index {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-faint);
+}
+.project-card__glyph {
+  opacity: 0.9;
+}
+
+.project-card__body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.project-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.project-card__body h3 {
+  font-size: 1.35rem;
+}
+.project-card__body > p {
+  color: var(--fg-dim);
+  font-size: 0.95rem;
+}
+
+.project-card__highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface-2));
+  border-radius: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+.project-card__highlight-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tech-stack li {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-dim);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.project-card__links {
+  margin-top: 0.4rem;
+}
+
+.projects-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.projects-secondary__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.projects-secondary__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.projects-secondary__head p {
+  color: var(--fg-faint);
+  font-size: 0.9rem;
+}
+
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.1rem 1.5rem;
+}
+.project-row__cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  background: var(--surface-2);
+  color: var(--accent);
+}
+.project-row__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.project-row__body h3 {
+  font-size: 1.05rem;
+}
+.project-row__body p {
+  color: var(--fg-dim);
+  font-size: 0.88rem;
+}
+.project-row__link {
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    column-count: 1;
+  }
+  .project-card--featured {
+    grid-template-columns: 1fr;
+  }
+  .project-card--featured .project-card__cover {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 640px) {
+  .project-row {
+    flex-wrap: wrap;
+  }
+  .project-row__link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.projects-empty {
+  color: var(--fg-faint);
+  font-size: 0.95rem;
+  padding: 2rem 0;
+  text-align: center;
+}

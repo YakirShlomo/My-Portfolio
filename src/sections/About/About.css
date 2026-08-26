@@ -1,0 +1,122 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.about-lead {
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--fg);
+  max-width: 62ch;
+  margin-bottom: 2rem;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 62ch;
+  color: var(--fg-dim);
+  margin-bottom: 2.5rem;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.75rem;
+  max-width: 42rem;
+}
+.about-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.about-facts .k {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.about-facts .v {
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.about-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+
+.about-portrait__frame {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  aspect-ratio: 3 / 4;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-card);
+}
+.about-portrait__frame img,
+.about-portrait__frame .tilted-card-figure {
+  border-radius: 1.25rem;
+}
+.about-portrait__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-portrait__frame .tilted-card-img {
+  object-fit: cover;
+  border-radius: 1.25rem;
+}
+.about-portrait__glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 30% 20%, var(--accent-glow), transparent 60%);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.about-portrait__resume {
+  width: 100%;
+  max-width: 22rem;
+  justify-content: center;
+}
+
+.about-portrait__certs {
+  width: 100%;
+  max-width: 22rem;
+  justify-content: center;
+  color: var(--fg-dim);
+  border-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    position: static;
+    order: -1;
+  }
+  .about-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-facts {
+    grid-template-columns: 1fr;
+  }
+}

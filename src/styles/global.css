@@ -1,0 +1,238 @@
+/* ---------- Layout primitives ---------- */
+.section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(5rem, 12vw, 9rem) var(--gutter);
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.25rem;
+}
+.section__index {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+}
+.section__index::after {
+  content: ' /';
+  color: var(--fg-faint);
+}
+.section__title {
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+  color: var(--fg);
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-h: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: var(--btn-h);
+  min-height: 44px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: transform 160ms var(--ease-out), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--small {
+  --btn-h: 2.5rem;
+  padding: 0 1.15rem;
+  font-size: 0.85rem;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover {
+    background: var(--accent-bright);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover {
+    border-color: var(--accent-dim);
+    color: var(--accent-bright);
+  }
+}
+
+.btn__icon {
+  display: inline-flex;
+  transition: transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .btn__icon {
+    transform: translateY(2px);
+  }
+}
+
+/* ---------- Filter chips (Skills, Projects) ---------- */
+.chip {
+  height: 44px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+  transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+}
+.chip:hover {
+  border-color: var(--line-strong);
+  color: var(--fg);
+}
+.chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+/* ---------- Background ambience ---------- */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+.bg-glow--a {
+  width: 46vw;
+  height: 46vw;
+  top: -14vw;
+  right: -12vw;
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+}
+.bg-glow--b {
+  width: 38vw;
+  height: 38vw;
+  bottom: -16vw;
+  left: -10vw;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+}
+.bg-grain {
+  position: absolute;
+  inset: -10%;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 100;
+  transform-origin: left;
+  transform: scaleX(var(--scroll-progress, 0));
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  pointer-events: none;
+}
+
+/* ---------- Marquee ---------- */
+/* ---------- Footer ---------- */
+.footer {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding: clamp(3rem, 8vw, 5rem) var(--gutter) 2rem;
+}
+.footer__big {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 11vw, 7rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  user-select: none;
+}
+.footer__bar {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--fg-faint);
+}
+.footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--fg-dim);
+  transition: color 200ms ease;
+}
+.footer__top:hover {
+  color: var(--accent);
+}
+.footer--minimal {
+  border-top: 1px solid var(--line);
+  padding: 2rem var(--gutter);
+}
+.private-footer-links {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.05rem;
+}
+.private-footer-links a {
+  color: var(--fg-dim);
+  transition: color 200ms ease;
+}
+.private-footer-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .footer__bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Route lazy-load fallback ---------- */
+.route-fallback {
+  min-height: 100dvh;
+  background: var(--bg);
+}
