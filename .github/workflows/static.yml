@@ -36,6 +36,30 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Verify build output is the Vite bundle, not raw source
+        run: |
+          FILE="dist/index.html"
+          if [ ! -f "$FILE" ]; then
+            echo "::error::$FILE does not exist — build did not produce output"
+            exit 1
+          fi
+          if grep -q '/src/main.jsx' "$FILE"; then
+            echo "::error::$FILE still references /src/main.jsx — this is the unbuilt source HTML, not the Vite bundle"
+            exit 1
+          fi
+          if grep -q 'href="/favicon.svg"' "$FILE"; then
+            echo "::error::$FILE references href=\"/favicon.svg\" without the base path — this is the unbuilt source HTML"
+            exit 1
+          fi
+          if ! grep -q '/My-Portfolio/assets/' "$FILE"; then
+            echo "::error::$FILE does not reference /My-Portfolio/assets/ — bundled, base-prefixed assets are missing"
+            exit 1
+          fi
+          if ! grep -q 'href="/My-Portfolio/favicon.svg"' "$FILE"; then
+            echo "::error::$FILE does not reference href=\"/My-Portfolio/favicon.svg\" — favicon is not base-prefixed"
+            exit 1
+          fi
+          echo "OK: dist/index.html is the built, base-prefixed Vite bundle."
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
