@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useGate } from '../../context/GateContext.jsx';
 import { useReducedMotion, useIsTouch } from '../../hooks/useReducedMotion.js';
-import { useConstellation } from '../../hooks/useConstellation.js';
 import { useAnchorScroll } from '../../hooks/useAnchorScroll.js';
 import DecryptedText from '../../components/react-bits/DecryptedText.jsx';
 import ParticleText from '../../components/react-bits/ParticleText/ParticleText.jsx';
 import Magnet from '../../components/react-bits/Magnet.jsx';
 import AnimatedContent from '../../components/react-bits/AnimatedContent.jsx';
 import Icon from '../../components/icons/Icon.jsx';
+import HeroSkillDots from './HeroSkillDots.jsx';
 import './Hero.css';
 
 const NAME = 'Yakir Shlomo';
@@ -18,10 +18,7 @@ export default function Hero() {
   const isTouch = useIsTouch();
   const handleAnchor = useAnchorScroll();
 
-  const canvasRef = useRef(null);
   const heroRef = useRef(null);
-
-  useConstellation({ canvasRef, heroRef, unlocked, reducedMotion });
 
   useEffect(() => {
     if (reducedMotion) return undefined;
@@ -45,15 +42,42 @@ export default function Hero() {
     };
   }, [reducedMotion]);
 
+  // Corner-frame parallax: a cheap, purely cosmetic pointer response — the
+  // Hero rect is measured once (on mount/resize) rather than on every
+  // pointermove, so this never forces a synchronous layout read from a
+  // high-frequency event.
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+    let rect = hero.getBoundingClientRect();
+    function onResize() {
+      rect = hero.getBoundingClientRect();
+    }
+    function onMove(e) {
+      const px = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      const py = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      hero.style.setProperty('--fpx', px.toFixed(3));
+      hero.style.setProperty('--fpy', py.toFixed(3));
+    }
+    function onLeave() {
+      hero.style.setProperty('--fpx', 0);
+      hero.style.setProperty('--fpy', 0);
+    }
+    window.addEventListener('resize', onResize, { passive: true });
+    hero.addEventListener('pointermove', onMove, { passive: true });
+    hero.addEventListener('pointerleave', onLeave, { passive: true });
+    return () => {
+      window.removeEventListener('resize', onResize);
+      hero.removeEventListener('pointermove', onMove);
+      hero.removeEventListener('pointerleave', onLeave);
+    };
+  }, [reducedMotion]);
+
   const magneticDisabled = reducedMotion || isTouch;
 
   return (
     <section id="home" className="hero" ref={heroRef}>
-      <div className="hero__media" aria-hidden="true">
-        <canvas id="hero-canvas" ref={canvasRef} className="hero__canvas" />
-        <div className="hero__veil" />
-      </div>
-
       <div className="hero__content">
         <div className="hero__float">
           <AnimatedContent distance={24} duration={0.7}>
@@ -91,11 +115,11 @@ export default function Hero() {
             </span>
             <span className="line line--accent">
               {reducedMotion ? (
-                <span>Full-stack developer.</span>
+                <span>Software engineer.</span>
               ) : (
                 <DecryptedText
                   key={unlocked ? 'unlocked' : 'locked'}
-                  text="Full-stack developer."
+                  text="Software engineer."
                   animateOn={unlocked ? 'view' : 'hover'}
                   sequential
                   revealDirection="start"
@@ -145,6 +169,23 @@ export default function Hero() {
           </div>
         </AnimatedContent>
       </div>
+
+      <div className="hero__frames" aria-hidden="true">
+        <span className="hero__frame hero__frame--tl">
+          <span className="hero__frame__line" />
+        </span>
+        <span className="hero__frame hero__frame--tr">
+          <span className="hero__frame__line" />
+        </span>
+        <span className="hero__frame hero__frame--bl">
+          <span className="hero__frame__line" />
+        </span>
+        <span className="hero__frame hero__frame--br">
+          <span className="hero__frame__line" />
+        </span>
+      </div>
+
+      <HeroSkillDots heroRef={heroRef} />
 
       <a href="#about" className="hero__scroll" onClick={handleAnchor('about')} aria-label="Scroll to about">
         <span className="hero__scroll-line">

@@ -43,6 +43,23 @@
   height: 100%;
   object-fit: cover;
 }
+.cert-paper-thumb__pdf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  color: var(--accent);
+  background: var(--surface-2);
+}
+.cert-paper-thumb__pdf-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--fg-faint);
+}
 
 /* Compact grid used inside the About Certificates modal */
 .certificates-grid {
@@ -63,7 +80,8 @@
   border-color: var(--accent-dim);
   transform: translateY(-2px);
 }
-.cert-paper-thumb--grid img {
+.cert-paper-thumb--grid img,
+.cert-paper-thumb--grid .cert-paper-thumb__pdf {
   flex: 1;
   min-height: 0;
   object-fit: cover;

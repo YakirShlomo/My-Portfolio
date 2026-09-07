@@ -144,3 +144,190 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Send-picker modal ---------- */
+.send-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 3rem);
+  background: rgba(4, 4, 6, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 260ms var(--ease-out), visibility 260ms var(--ease-out);
+}
+.send-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.send-modal__panel {
+  width: min(26rem, 100%);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-lift);
+  padding: 1.5rem;
+  outline: none;
+  transform: scale(0.96) translateY(8px);
+  opacity: 0;
+  transition: transform 280ms var(--ease-out), opacity 280ms var(--ease-out);
+}
+.send-modal.is-open .send-modal__panel {
+  transform: none;
+  opacity: 1;
+}
+
+.send-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+.send-modal__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.send-modal__heading h3 {
+  font-size: 1.1rem;
+}
+.send-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--fg-dim);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.send-modal__close:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+
+.send-modal__hint {
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+}
+
+.send-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.send-modal__option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  text-align: left;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 160ms var(--ease-out);
+}
+.send-modal__option:hover,
+.send-modal__option:focus-visible {
+  border-color: var(--accent-dim);
+  background: rgba(111, 199, 214, 0.08);
+}
+.send-modal__option:active {
+  transform: scale(0.98);
+}
+.send-modal__option-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.send-modal__option-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+}
+.send-modal__option-label {
+  font-size: 0.92rem;
+  color: var(--fg);
+}
+.send-modal__option-hint {
+  font-size: 0.76rem;
+  color: var(--fg-faint);
+}
+.send-modal__option-arrow {
+  color: var(--fg-faint);
+  flex-shrink: 0;
+}
+
+.send-modal__option.is-copied {
+  border-color: var(--accent);
+  background: rgba(111, 199, 214, 0.12);
+}
+.send-modal__option.is-copied .send-modal__option-icon {
+  color: var(--accent-bright);
+}
+.send-modal__option.is-copied .send-modal__option-label {
+  color: var(--accent-bright);
+}
+
+.send-modal__fallback {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+.send-modal__fallback-hint {
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+.send-modal__fallback-text {
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.send-modal__fallback-text:focus-visible {
+  outline: none;
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .send-modal,
+  .send-modal__panel {
+    transition: opacity 60ms linear;
+  }
+  .send-modal__panel {
+    transform: none;
+  }
+}

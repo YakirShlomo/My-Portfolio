@@ -47,7 +47,16 @@ export default function CertificateLightbox({ certificate, onClose }) {
           <button className="cert-lightbox__close" onClick={onClose} aria-label="Close certificate">
             <Icon name="close" />
           </button>
-          <img src={certificate.image} alt={certificate.title} className="cert-lightbox__image" />
+          {certificate.type === 'pdf' ? (
+            <object data={certificate.image} type="application/pdf" className="cert-lightbox__pdf" aria-label={certificate.title}>
+              <div className="cert-lightbox__pdf-fallback">
+                <Icon name="doc" size={28} />
+                <p>Preview isn&rsquo;t available in this browser.</p>
+              </div>
+            </object>
+          ) : (
+            <img src={certificate.image} alt={certificate.title} className="cert-lightbox__image" />
+          )}
           <div className="cert-lightbox__caption">
             <h3>{certificate.title}</h3>
             {(certificate.issuer || certificate.date) && (
@@ -56,6 +65,16 @@ export default function CertificateLightbox({ certificate, onClose }) {
                 {certificate.issuer && certificate.date ? ' · ' : ''}
                 {certificate.date}
               </p>
+            )}
+            {certificate.type === 'pdf' && (
+              <a
+                href={certificate.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--small btn--ghost cert-lightbox__pdf-link"
+              >
+                <Icon name="external" /> Open PDF
+              </a>
             )}
           </div>
         </div>

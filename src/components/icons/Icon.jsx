@@ -25,12 +25,14 @@ const PATHS = {
   close: 'M3 3l10 10M13 3 3 13',
   folder: 'M2 4.5h4.5l1.5 2H14v6.5H2v-8.5Z',
   check: 'M3 8.5 6.5 12 13 4.5',
+  sparkle: 'M8 1 9.3 6.7 15 8 9.3 9.3 8 15 6.7 9.3 1 8 6.7 6.7Z',
+  copy: 'M6 2.5h6.5v6.5|M2.5 6h6.5v6.5h-6.5Z',
 };
 
 export default function Icon({ name, size = 16, className, strokeWidth = 1.3 }) {
   const spec = PATHS[name];
   if (!spec) return null;
-  const isFill = name === 'linkedin' || name === 'github';
+  const isFill = name === 'linkedin' || name === 'github' || name === 'sparkle';
   return (
     <svg
       width={size}

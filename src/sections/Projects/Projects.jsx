@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROJECTS, SECONDARY_PROJECTS, PROJECT_CATEGORIES, toPrivateHref } from '../../data/projects.js';
 import { useReducedMotion } from '../../hooks/useReducedMotion.js';
 import SplitText from '../../components/react-bits/SplitText.jsx';
@@ -37,6 +38,21 @@ export default function Projects() {
     [category]
   );
   const isEmpty = filteredPrimary.length === 0 && filteredSecondary.length === 0;
+
+  useEffect(() => {
+    // Every card remounts on filter change (key includes category), which
+    // changes .projects-grid's height. Each AnimatedContent card creates its
+    // own ScrollTrigger reading the layout at that moment, but sections
+    // further down the page (Contact) already have ScrollTrigger instances
+    // created once at initial mount, cached against the pre-filter page
+    // height. Without a refresh here, a shorter filtered layout leaves those
+    // stale — their trigger point can end up beyond the new, shorter
+    // scrollable range, so they never fire and stay permanently invisible,
+    // blocking the rest of the page. This runs after the new cards' own
+    // effects have registered (child effects flush before this one).
+    const raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(raf);
+  }, [category]);
 
   return (
     <section id="projects" className="section section--projects">

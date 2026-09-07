@@ -4,7 +4,7 @@ export const asset = (p) => import.meta.env.BASE_URL + p.replace(/^\//, '');
  * Home URL, always with a trailing slash before the base path — a real
  * anchor href, not a router <Link>. react-router's basename-joining
  * intentionally collapses `to="/"` to the bare basename (no trailing
- * slash: e.g. "/My-Portfolio" instead of "/My-Portfolio/"), which 404s on
+ * slash: e.g. "/repo-name" instead of "/repo-name/"), which 404s on
  * a hard reload against a static host. Since navigating from the private
  * project page back to Home is already meant to be a fresh load (the
  * entry gate re-arms every load by design), a plain anchor is the
@@ -56,3 +56,12 @@ export const SOCIAL_LINKS = {
 };
 
 export const RESUME_PDF = asset('assets/resume.pdf');
+
+/**
+ * Static first-page preview, used on mobile instead of the native <object>
+ * PDF embed (mobile browsers' inline PDF plugins don't reliably fit-to-
+ * width and can clip the page). Regenerate this whenever resume.pdf
+ * changes — see the "Updating the resume preview image" note in
+ * ResumeModal.jsx for the exact command.
+ */
+export const RESUME_PREVIEW = asset('assets/resume-preview.webp');

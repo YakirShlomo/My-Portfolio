@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Yakir Shlomo — Full-Stack Developer building production web platforms with React, Next.js, Node.js and Supabase. Software engineering student. Portfolio of projects, skills and experience." />
+    <meta name="description" content="Yakir Shlomo — Software engineer and engineering student building production web platforms and quality-focused tooling with React, Node.js and modern web technologies. Portfolio of projects, skills and experience." />
     <meta name="theme-color" content="#07070a" />
-    <meta property="og:title" content="Yakir Shlomo | Full-Stack Developer" />
-    <meta property="og:description" content="Full-Stack Developer · React · Next.js · Node.js · Supabase" />
+    <meta property="og:title" content="Yakir Shlomo | Software Engineer" />
+    <meta property="og:description" content="Software Engineer · Full-stack · QA-minded · React · Node.js" />
     <meta property="og:type" content="website" />
-    <title>Yakir Shlomo | Full-Stack Developer</title>
+    <title>Yakir Shlomo | Portfolio</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +34,7 @@
         var params = new URLSearchParams(window.location.search);
         var redirect = params.get('redirect');
         if (redirect) {
-          history.replaceState(null, '', '/My-Portfolio/' + redirect);
+          history.replaceState(null, '', '%BASE_URL%' + redirect);
         }
       })();
     </script>

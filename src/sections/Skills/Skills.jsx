@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SKILLS, SKILL_CATEGORIES } from '../../data/projects.js';
 import { useReducedMotion } from '../../hooks/useReducedMotion.js';
 import SplitText from '../../components/react-bits/SplitText.jsx';
@@ -23,6 +24,14 @@ export default function Skills() {
     () => (category === 'All' ? SKILLS : SKILLS.filter((s) => s.category === category)),
     [category]
   );
+
+  useEffect(() => {
+    // Same fix as Projects: filtering remounts the grid (key=category),
+    // changing this section's height and staling ScrollTrigger positions
+    // for everything further down the page.
+    const raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(raf);
+  }, [category]);
 
   return (
     <section id="skills" className="section section--skills">

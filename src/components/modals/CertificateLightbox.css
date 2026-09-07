@@ -65,6 +65,24 @@
   background: #0c0c0f;
 }
 
+.cert-lightbox__pdf {
+  width: 100%;
+  height: 65vh;
+  background: #1a1a1e;
+}
+.cert-lightbox__pdf-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+  color: var(--fg-faint);
+  text-align: center;
+  padding: 2rem;
+}
+
 .cert-lightbox__caption {
   padding: 1.25rem 1.5rem;
   border-top: 1px solid var(--line);
@@ -76,6 +94,9 @@
 .cert-lightbox__caption p {
   color: var(--fg-dim);
   font-size: 0.88rem;
+}
+.cert-lightbox__pdf-link {
+  margin-top: 0.9rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

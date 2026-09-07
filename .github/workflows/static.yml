@@ -35,9 +35,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
+        env:
+          # Unset today — set a repo variable named VITE_BASE_PATH (Settings
+          # → Secrets and variables → Actions → Variables) to override the
+          # base path in one place, e.g. to "/" for a custom domain. See
+          # vite.config.js for the full priority order.
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
         run: npm run build
       - name: Verify build output is the Vite bundle, not raw source
+        env:
+          # Mirrors vite.config.js's own priority order exactly, so this
+          # guard can never disagree with what the Build step just produced:
+          # VITE_BASE_PATH repo variable first, else the repo name (which
+          # github.event.repository.name always reflects correctly even
+          # after a rename), with no edits needed here either way.
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          REPO_BASE: /${{ github.event.repository.name }}/
         run: |
+          EXPECTED_BASE="${VITE_BASE_PATH:-$REPO_BASE}"
           FILE="dist/index.html"
           if [ ! -f "$FILE" ]; then
             echo "::error::$FILE does not exist — build did not produce output"
@@ -47,16 +62,19 @@ jobs:
             echo "::error::$FILE still references /src/main.jsx — this is the unbuilt source HTML, not the Vite bundle"
             exit 1
           fi
-          if grep -q 'href="/favicon.svg"' "$FILE"; then
+          # Skipped when the base path IS "/" (custom domain / root site) —
+          # in that case an unprefixed favicon href is the correct output,
+          # not a sign of unbuilt source.
+          if [ "$EXPECTED_BASE" != "/" ] && grep -q 'href="/favicon.svg"' "$FILE"; then
             echo "::error::$FILE references href=\"/favicon.svg\" without the base path — this is the unbuilt source HTML"
             exit 1
           fi
-          if ! grep -q '/My-Portfolio/assets/' "$FILE"; then
-            echo "::error::$FILE does not reference /My-Portfolio/assets/ — bundled, base-prefixed assets are missing"
+          if ! grep -q "${EXPECTED_BASE}assets/" "$FILE"; then
+            echo "::error::$FILE does not reference ${EXPECTED_BASE}assets/ — bundled, base-prefixed assets are missing"
             exit 1
           fi
-          if ! grep -q 'href="/My-Portfolio/favicon.svg"' "$FILE"; then
-            echo "::error::$FILE does not reference href=\"/My-Portfolio/favicon.svg\" — favicon is not base-prefixed"
+          if ! grep -q "href=\"${EXPECTED_BASE}favicon.svg\"" "$FILE"; then
+            echo "::error::$FILE does not reference href=\"${EXPECTED_BASE}favicon.svg\" — favicon is not base-prefixed"
             exit 1
           fi
           echo "OK: dist/index.html is the built, base-prefixed Vite bundle."

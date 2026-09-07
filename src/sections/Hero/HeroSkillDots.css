@@ -1,0 +1,164 @@
+.skill-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Only the dot buttons themselves re-enable pointer events below — the
+     layer as a whole must never intercept clicks meant for the Hero
+     content sitting above it in stacking order. */
+  pointer-events: none;
+}
+
+.skill-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+.skill-dot:active {
+  cursor: grabbing;
+}
+
+/* The button itself stays 20x20 (the physics loop transforms this exact
+   box to center it at the dot's simulated x/y — resizing it would throw
+   that math off), but a 20px target is well under the ~44px comfortable
+   touch minimum. This invisible pseudo-element extends the hit/hover
+   area to 44x44 without touching the button's own box (and therefore
+   without touching drag/collision/containment math at all): pointer and
+   touch events landing anywhere in it resolve to the real .skill-dot
+   button, since a ::before isn't an independent event target. */
+.skill-dot::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+
+/* Outer ring: the subtle, mostly-static "shell". Inset in from the
+   button's own 20x20 box (rather than filling it) so the visible circle
+   reads smaller and tighter around the glowing core, while the button's
+   box — and therefore the physics transform anchored to it — is
+   untouched. */
+.skill-dot__ring {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(154, 220, 231, 0.28);
+  background: rgba(111, 199, 214, 0.04);
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms var(--ease-out);
+}
+
+/* Inner core: the small glowing point that does the breathing. Each dot
+   gets its own --pulse-delay/--pulse-duration (set inline, deterministic
+   per index) so the whole group never blinks in unison — a handful of
+   independent, quiet pulses reads as alive; a synchronized blink reads as
+   a warning light. */
+.skill-dot__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  transform: translate(-50%, -50%) scale(1);
+  animation: skill-dot-pulse var(--pulse-duration, 3s) ease-in-out infinite;
+  animation-delay: var(--pulse-delay, 0s);
+}
+
+@keyframes skill-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    box-shadow: 0 0 3px 0.5px rgba(111, 199, 214, 0.28);
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 7px 1.5px rgba(111, 199, 214, 0.5);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.skill-dot:hover .skill-dot__ring,
+.skill-dot.is-active .skill-dot__ring {
+  border-color: var(--accent-bright);
+  background: rgba(111, 199, 214, 0.13);
+  transform: scale(1.3);
+}
+.skill-dot.is-dragging .skill-dot__ring {
+  border-color: var(--accent-bright);
+  background: rgba(111, 199, 214, 0.18);
+  transform: scale(1.45);
+}
+
+/* While interacted with, the core holds a steady bright glow instead of
+   continuing its ambient pulse — the dot reads as "responding to you"
+   rather than obliviously carrying on its own idle cycle. */
+.skill-dot:hover .skill-dot__core,
+.skill-dot:focus-visible .skill-dot__core,
+.skill-dot.is-active .skill-dot__core {
+  animation-play-state: paused;
+  opacity: 1;
+  box-shadow: 0 0 8px 2px rgba(111, 199, 214, 0.55);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.skill-dot:focus-visible {
+  outline: none;
+}
+.skill-dot:focus-visible .skill-dot__ring {
+  border-color: var(--accent-bright);
+  box-shadow: 0 0 0 3px rgba(154, 220, 231, 0.3);
+  transform: scale(1.3);
+}
+
+.skill-dot__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-100% - 11px));
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  background: rgba(19, 19, 25, 0.92);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.32rem 0.7rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms var(--ease-out);
+}
+
+.skill-dot:hover .skill-dot__label,
+.skill-dot:focus-visible .skill-dot__label,
+.skill-dot.is-active .skill-dot__label {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 15px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-dot__core {
+    animation: none !important;
+    opacity: 0.85;
+    box-shadow: 0 0 5px 1px rgba(111, 199, 214, 0.4);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .skill-dot__ring,
+  .skill-dot__label {
+    transition: opacity 120ms linear, background-color 120ms linear, border-color 120ms linear;
+  }
+}

@@ -4,10 +4,46 @@ import { CONTACT_LINKS, EMAIL } from '../../lib/constants.js';
 import SplitText from '../../components/react-bits/SplitText.jsx';
 import AnimatedContent from '../../components/react-bits/AnimatedContent.jsx';
 import Icon from '../../components/icons/Icon.jsx';
+import ContactSendModal from './ContactSendModal.jsx';
 import './Contact.css';
 
 const EMPTY_FORM = { name: '', subject: '', message: '' };
 const LIMITS = { name: 80, subject: 120, message: 1200 };
+
+const SEND_OPTION_LABELS = {
+  gmail: 'Gmail',
+  outlook: 'Outlook',
+};
+
+/**
+ * Builds the Gmail/Outlook compose links from the same validated, trimmed
+ * fields. Every value goes through encodeURIComponent — nothing is ever
+ * concatenated raw into a URL or rendered as HTML, so there's no path for
+ * injected markup or URL parameter injection (a newline or stray `&`/`=`
+ * in the subject or message can't spill into a new field).
+ */
+function buildSendLinks({ name, subject, message }) {
+  const body = `From: ${name}\n\n${message}`;
+  const to = encodeURIComponent(EMAIL);
+  const su = encodeURIComponent(subject);
+  const bo = encodeURIComponent(body);
+  return {
+    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${bo}`,
+    // outlook.office.com's compose deeplink also works for personal
+    // outlook.com/hotmail.com accounts (it redirects appropriately after
+    // sign-in), so one link covers both without guessing account type.
+    outlook: `https://outlook.office.com/mail/deeplink/compose?to=${to}&subject=${su}&body=${bo}`,
+  };
+}
+
+/**
+ * Plain text only — this is written straight to the clipboard and, in the
+ * no-clipboard-API fallback, placed as a <textarea> value, never parsed or
+ * rendered as HTML, so there's no injection surface either way.
+ */
+function buildCopyText({ name, subject, message }) {
+  return `To: ${EMAIL}\nFrom: ${name}\nSubject: ${subject}\n\n${message}`;
+}
 
 export default function Contact() {
   const reducedMotion = useReducedMotion();
@@ -15,6 +51,10 @@ export default function Contact() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
+  const [sentVia, setSentVia] = useState(null);
+  const [sendLinks, setSendLinks] = useState(null);
+  const [copyText, setCopyText] = useState('');
+  const [pickerOpen, setPickerOpen] = useState(false);
 
   function updateField(field) {
     return (e) => {
@@ -49,10 +89,19 @@ export default function Contact() {
       return;
     }
 
-    const body = `From: ${name}\n\n${message}`;
-    const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    setSendLinks(buildSendLinks({ name, subject, message }));
+    setCopyText(buildCopyText({ name, subject, message }));
+    setSent(false);
+    setPickerOpen(true);
+  }
+
+  function handleChoosePicker(option) {
+    const url = sendLinks?.[option];
+    if (!url) return;
+    setPickerOpen(false);
+    setSentVia(option);
     setSent(true);
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   return (
@@ -136,16 +185,23 @@ export default function Contact() {
                     <Icon name="paperPlane" /> Send
                   </span>
                 </button>
-                <span className="contact-form__hint">Your email app will open with the message ready to send.</span>
+                <span className="contact-form__hint">Choose Gmail, Outlook, or copy your message next.</span>
               </div>
 
               {sent && (
                 <p className="contact-form__note" role="status">
-                  Opening your email app…
+                  Opening in {SEND_OPTION_LABELS[sentVia] || 'your mail provider'}&hellip;
                 </p>
               )}
             </form>
           </AnimatedContent>
+
+          <ContactSendModal
+            isOpen={pickerOpen}
+            onClose={() => setPickerOpen(false)}
+            onChoose={handleChoosePicker}
+            copyText={copyText}
+          />
 
           <AnimatedContent distance={16} delay={0.15}>
             <ul className="contact-links">

@@ -16,6 +16,13 @@
   text-align: center;
   padding: clamp(3rem, 8vw, 5rem) var(--gutter);
   gap: 1.1rem;
+  /* name/tag/stack/note come from the URL's query string — attacker-
+     controlled. sanitizeParam() caps their length, but a single long
+     unbroken token (no spaces) within that cap still won't wrap at a
+     normal word boundary and would otherwise force this section, and the
+     whole page, wide. Inherited so it also covers the title/body/eyebrow/
+     stack-pill text below without repeating it on each one. */
+  overflow-wrap: anywhere;
 }
 
 .private-hero__icon {
@@ -64,6 +71,10 @@
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.3rem 0.8rem;
+  /* Flex items default to min-width: auto, which can hold a pill to its
+     unbroken content width regardless of the parent's overflow-wrap. */
+  min-width: 0;
+  max-width: 100%;
 }
 
 .private-hero__cta {

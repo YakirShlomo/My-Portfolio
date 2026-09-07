@@ -8,7 +8,18 @@
       // shared link landing on a nested route (e.g. /private-project?...)
       // 404s before React Router ever runs. Redirect to the SPA root,
       // carrying the intended path along as a query param it can restore.
-      var base = '/My-Portfolio/';
+      //
+      // This file is copied verbatim from public/ (Vite doesn't process
+      // it), so it can't read the configured VITE_BASE_PATH. Instead the
+      // base is derived from the URL itself: on a GitHub Pages project
+      // site the first path segment is the repo-name base — except when
+      // this app is deployed at a custom domain / account root (base "/"),
+      // where that first segment is actually the start of a real app
+      // route instead. Listing this app's one nested route resolves that
+      // ambiguity with zero build-time configuration needed here.
+      var APP_ROUTES = ['private-project'];
+      var segments = location.pathname.split('/').filter(Boolean);
+      var base = segments.length && APP_ROUTES.indexOf(segments[0]) === -1 ? '/' + segments[0] + '/' : '/';
       var full = location.pathname.slice(base.length) + location.search + location.hash;
       location.replace(base + '?redirect=' + encodeURIComponent(full));
     </script>

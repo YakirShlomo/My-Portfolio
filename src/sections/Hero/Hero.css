@@ -7,25 +7,141 @@
   justify-content: center;
   overflow: hidden;
   --hero-scroll: 0;
+  --fpx: 0;
+  --fpy: 0;
+  /* Soft cyan-tinted off-white, not pure white — matches the accent
+     family (--accent-bright: #9adce7) instead of clashing with it. */
+  --hero-frame-color: rgba(214, 241, 244, 0.55);
+  /* Single source of truth for the frame rectangle: how far each corner
+     mark sits from the Hero's own edge. Percentages resolve against the
+     Hero box itself (the nearest positioned ancestor), not the viewport,
+     so this tracks --hero-scroll-independent layout exactly. The physics
+     hook never duplicates these numbers — it measures the corner marks'
+     own rendered rects instead, so the visual frame and the drag/bounce
+     boundary can never drift apart. Desktop settles near the generous
+     max (a composed, pulled-in frame); mobile falls back to the min
+     (still felt, not just the bare edge) since there's little width to
+     spare once the content nearly fills the viewport.
+  */
+  --frame-inset-x: clamp(1.5rem, 9%, 6rem);
+  --frame-inset-y: clamp(1.25rem, 10%, 4.5rem);
 }
 
-.hero__media {
+/* ---------- Corner frames ---------- */
+.hero__frames {
   position: absolute;
   inset: 0;
   z-index: 0;
-  transform: translateY(calc(var(--hero-scroll) * -40px));
-  opacity: calc(1 - var(--hero-scroll) * 0.5);
+  pointer-events: none;
 }
-.hero__canvas {
+.hero__frame {
+  position: absolute;
+  width: clamp(2rem, 4.5vw, 3.25rem);
+  height: clamp(2rem, 4.5vw, 3.25rem);
+  transform: translate3d(calc(var(--fpx) * 5px), calc(var(--fpy) * 5px), 0);
+  transition: transform 500ms var(--ease-out);
+}
+.hero__frame--tl {
+  top: var(--frame-inset-y);
+  left: var(--frame-inset-x);
+}
+.hero__frame--tr {
+  top: var(--frame-inset-y);
+  right: var(--frame-inset-x);
+}
+.hero__frame--bl {
+  bottom: var(--frame-inset-y);
+  left: var(--frame-inset-x);
+}
+.hero__frame--br {
+  bottom: var(--frame-inset-y);
+  right: var(--frame-inset-x);
+}
+
+.hero__frame__line {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  opacity: 0;
+  border-style: solid;
+  border-color: var(--hero-frame-color);
+  border-width: 0;
+  animation-name: hero-frame-reveal;
+  animation-duration: 900ms;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: forwards;
 }
-.hero__veil {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 100%, var(--bg) 5%, transparent 55%);
+.hero__frame--tl .hero__frame__line {
+  border-width: 1.5px 0 0 1.5px;
+  transform-origin: top left;
+  animation-name: hero-frame-reveal, hero-frame-breathe-a;
+  animation-duration: 900ms, 7.5s;
+  animation-timing-function: var(--ease-out), ease-in-out;
+  animation-delay: 0ms, 900ms;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+.hero__frame--tr .hero__frame__line {
+  border-width: 1.5px 1.5px 0 0;
+  transform-origin: top right;
+  animation-name: hero-frame-reveal, hero-frame-breathe-b;
+  animation-duration: 1000ms, 8.5s;
+  animation-timing-function: var(--ease-out), ease-in-out;
+  animation-delay: 120ms, 1020ms;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+.hero__frame--bl .hero__frame__line {
+  border-width: 0 0 1.5px 1.5px;
+  transform-origin: bottom left;
+  animation-name: hero-frame-reveal, hero-frame-breathe-b;
+  animation-duration: 1000ms, 8s;
+  animation-timing-function: var(--ease-out), ease-in-out;
+  animation-delay: 180ms, 1080ms;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+.hero__frame--br .hero__frame__line {
+  border-width: 0 1.5px 1.5px 0;
+  transform-origin: bottom right;
+  animation-name: hero-frame-reveal, hero-frame-breathe-a;
+  animation-duration: 900ms, 7s;
+  animation-timing-function: var(--ease-out), ease-in-out;
+  animation-delay: 60ms, 960ms;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+
+@keyframes hero-frame-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes hero-frame-breathe-a {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.015) translate(1px, -1px);
+  }
+}
+@keyframes hero-frame-breathe-b {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.01) translate(-1px, 1px);
+  }
 }
 
 .hero__content {
@@ -183,7 +299,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__media,
   .hero__content,
   .hero__scroll {
     transform: none !important;
@@ -192,6 +307,15 @@
   .hero__scroll-line span {
     animation: none;
     top: 0;
+  }
+  .hero__frame {
+    transform: none !important;
+    transition: none;
+  }
+  .hero__frame__line {
+    animation: none !important;
+    opacity: 0.75;
+    transform: none;
   }
 }
 

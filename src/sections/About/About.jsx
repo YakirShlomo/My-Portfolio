@@ -52,9 +52,9 @@ export default function About() {
                 way to done.
               </p>
               <p>
-                The goal: grow into a full-stack developer who builds responsive, efficient web apps, and a game
-                developer who designs immersive, engaging experiences — and find the seams where those two worlds
-                meet.
+                The goal: grow into a well-rounded software engineer — comfortable across the stack, careful about
+                quality and testing, and just as interested in how a system is built as in whether it actually works
+                the way it should.
               </p>
               <p>
                 My approach is simple. Find a field you genuinely like, then push it as far as you can — keep

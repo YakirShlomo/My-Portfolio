@@ -1,4 +1,4 @@
-.gate3 {
+.ai-gate {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -6,26 +6,29 @@
   align-items: center;
   justify-content: center;
   overflow-y: auto;
-  padding: 2rem 1rem;
+  padding: 2rem 1.25rem;
   background: var(--bg);
   transition: opacity 480ms var(--ease-in-out), filter 480ms var(--ease-in-out), transform 480ms var(--ease-in-out);
 }
-.gate3.is-unlocking {
+.ai-gate:focus {
+  outline: none;
+}
+.ai-gate.is-unlocking {
   opacity: 0;
   filter: blur(6px);
   transform: scale(1.03);
   pointer-events: none;
 }
 
-.gate3__glow {
+.ai-gate__glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 32%, var(--accent-glow), transparent 55%);
-  opacity: 0.6;
+  background: radial-gradient(circle at 50% 36%, var(--accent-glow), transparent 55%);
+  opacity: 0.55;
   pointer-events: none;
 }
 
-.gate3__inner {
+.ai-gate__inner {
   position: relative;
   z-index: 1;
   display: flex;
@@ -33,312 +36,166 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 25rem;
+  max-width: 28rem;
   margin: auto;
 }
 
-.gate3__mark {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: var(--accent);
-  margin-bottom: 1rem;
+.ai-gate__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--accent-bright);
+  box-shadow: 0 0 0 6px var(--accent-glow);
+  margin-bottom: 1.4rem;
 }
 
-.gate3__kicker {
+.ai-gate__kicker {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fg-faint);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
 }
 
-.gate3__title {
-  font-size: clamp(1.4rem, 4.6vw, 1.8rem);
+.ai-gate__title {
+  font-size: clamp(1.4rem, 4.6vw, 1.9rem);
   line-height: 1.3;
+  max-width: 20ch;
   margin-bottom: 2.25rem;
 }
 
-/* ---------- Checklist ---------- */
-.gate3__checklist {
+/* ---------- Prompt bar ---------- */
+.ai-gate__bar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
   width: 100%;
-  gap: 0.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.ai-gate__bar:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-.gate3__step {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  text-align: left;
-  padding: 0.85rem 0.25rem;
-  border-top: 1px solid var(--line);
-  transition: opacity 220ms ease;
-}
-.gate3__step:first-child {
-  border-top: none;
-}
-.gate3__step.is-pending {
-  opacity: 0.4;
-}
-.gate3__step.is-done {
-  opacity: 0.65;
+.ai-gate__bar-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--accent-dim);
 }
 
-.gate3__step-num {
+.ai-gate__input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+.ai-gate__input::placeholder {
+  color: var(--fg-faint);
+}
+.ai-gate__input:focus {
+  outline: none;
+}
+
+.ai-gate__send {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.6rem;
-  height: 1.6rem;
-  margin-top: 0.1rem;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fg-dim);
-}
-.gate3__step.is-active .gate3__step-num {
-  border-color: var(--accent);
-  color: var(--accent-bright);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-.gate3__step.is-done .gate3__step-num {
-  border-color: var(--accent-dim);
-  color: var(--accent);
-  background: transparent;
-}
-
-.gate3__step-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding-top: 0.05rem;
-}
-.gate3__step-label {
-  font-size: 0.95rem;
-  color: var(--fg);
-}
-.gate3__step.is-pending .gate3__step-label,
-.gate3__step.is-done .gate3__step-label {
-  color: var(--fg-dim);
-}
-.gate3__step-hint {
-  font-size: 0.82rem;
-  color: var(--fg-faint);
-}
-
-.gate3__control {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 0 0.35rem;
-}
-
-/* ---------- Step 1: align ---------- */
-.gate3__stage {
-  position: relative;
-  width: clamp(9.5rem, 40vw, 11.5rem);
-  height: clamp(9.5rem, 40vw, 11.5rem);
-}
-
-.gate3__target {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40%;
-  height: 40%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1.5px dashed var(--accent-dim);
-  transition: border-color 260ms ease, box-shadow 260ms ease;
-}
-
-.gate3__node-wrap {
-  position: absolute;
-  top: 8%;
-  left: 8%;
-  width: max(44px, 24%);
-  height: max(44px, 24%);
-  animation: gate3-node-bob 2.6s var(--ease-in-out) infinite;
-}
-.gate3__node-wrap.is-aligned {
-  animation: none;
-}
-
-.gate3__node {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, var(--accent-bright), var(--accent) 60%, var(--accent-dim));
-  box-shadow: 0 0 0 4px var(--accent-glow), 0 8px 20px -6px rgba(0, 0, 0, 0.6);
-  cursor: grab;
-  touch-action: none;
-  transition: transform 320ms var(--ease-spring), box-shadow 200ms ease;
-}
-.gate3__node:focus-visible {
-  outline: 2px solid var(--accent-bright);
-  outline-offset: 3px;
-}
-.gate3__node.is-dragging {
-  cursor: grabbing;
-  transition: none;
-  box-shadow: 0 0 0 6px var(--accent-glow), 0 10px 24px -6px rgba(0, 0, 0, 0.7);
-}
-.gate3__node-wrap.is-aligned .gate3__node {
-  box-shadow: 0 0 0 6px var(--accent-glow), 0 0 30px 4px var(--accent-glow);
-}
-.gate3__stage:has(.gate3__node-wrap.is-aligned) .gate3__target {
-  border-style: solid;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 6px var(--accent-glow);
-}
-
-@keyframes gate3-node-bob {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(2px, -3px);
-  }
-}
-
-.gate3__alt {
-  margin-top: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fg-faint);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 180ms ease;
-}
-.gate3__alt:hover,
-.gate3__alt:focus-visible {
-  color: var(--accent-bright);
-}
-
-/* ---------- Step 2: charge ---------- */
-.gate3__hold {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  color: var(--accent-bright);
-  transition: transform 160ms var(--ease-out), border-color 200ms ease;
-}
-.gate3__hold::after {
-  content: '';
-  position: absolute;
-  inset: 30%;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   background: var(--accent);
-  opacity: 0.25;
-  transition: transform 200ms var(--ease-out), opacity 200ms ease;
+  color: var(--accent-ink);
+  transition: transform 160ms var(--ease-out), background-color 200ms ease;
 }
-.gate3__hold.is-charging {
-  transform: scale(0.96);
-  border-color: var(--accent-dim);
+.ai-gate__send:hover {
+  background: var(--accent-bright);
 }
-.gate3__hold.is-charging::after {
-  transform: scale(1.35);
-  opacity: 0.45;
+.ai-gate__send:active {
+  transform: scale(0.94);
 }
-.gate3__hold:focus-visible {
+.ai-gate__send:focus-visible {
   outline: 2px solid var(--accent-bright);
   outline-offset: 3px;
 }
 
-.gate3__ring {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-.gate3__ring-track,
-.gate3__ring-fill {
-  fill: none;
-  stroke-width: 3;
-}
-.gate3__ring-track {
-  stroke: var(--line-strong);
-}
-.gate3__ring-fill {
-  stroke: var(--accent-bright);
-  stroke-linecap: round;
-  stroke-dasharray: 169.6;
-  stroke-dashoffset: 169.6;
-  transition: stroke-dashoffset 200ms var(--ease-out);
-}
-.gate3__hold.is-charging .gate3__ring-fill {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1000ms linear;
+.ai-gate__hint {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-faint);
 }
 
-/* ---------- Step 3: enter ---------- */
-.gate3__enter {
-  width: 100%;
-  max-width: 14rem;
+/* ---------- Responding state ---------- */
+.ai-gate__response {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--fg-dim);
+  font-size: 0.9rem;
 }
 
-/* ---------- Flash + reduced motion ---------- */
-.gate3__flash {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: var(--fg);
-  opacity: 0;
-  pointer-events: none;
+.ai-gate__dots {
+  display: inline-flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
 }
-.gate3__flash.is-active {
-  animation: gate3-flash 640ms var(--ease-in-out) forwards;
+.ai-gate__dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  animation: ai-gate-dot 1.1s ease-in-out infinite;
 }
-@keyframes gate3-flash {
-  0% {
-    opacity: 0;
-  }
-  12% {
-    opacity: 0.08;
-  }
+.ai-gate__dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.ai-gate__dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes ai-gate-dot {
+  0%,
+  60%,
   100% {
-    opacity: 0;
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gate3 {
+  .ai-gate {
     transition: opacity 60ms linear;
   }
-  .gate3.is-unlocking {
+  .ai-gate.is-unlocking {
     filter: none;
     transform: none;
-  }
-  .gate3__node-wrap {
-    animation: none;
-  }
-  .gate3__node {
-    transition: none;
-  }
-  .gate3__flash.is-active {
-    display: none;
   }
 }
 
 @media (max-width: 420px) {
-  .gate3__title {
+  .ai-gate__title {
     font-size: 1.3rem;
-  }
-  .gate3__step {
-    gap: 0.7rem;
   }
 }

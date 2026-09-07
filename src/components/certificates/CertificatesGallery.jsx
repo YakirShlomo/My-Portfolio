@@ -45,7 +45,14 @@ export default function CertificatesGallery({ emptyHint, compact = false }) {
               onClick={() => setActive(cert)}
               aria-label={`View certificate: ${cert.title}`}
             >
-              <img src={cert.image} alt="" />
+              {cert.type === 'pdf' ? (
+                <span className="cert-paper-thumb__pdf" aria-hidden="true">
+                  <Icon name="doc" size={26} />
+                  <span className="cert-paper-thumb__pdf-tag">PDF</span>
+                </span>
+              ) : (
+                <img src={cert.image} alt="" />
+              )}
               <span className="cert-paper-thumb__label">{cert.title}</span>
             </button>
           ))}
@@ -74,7 +81,14 @@ export default function CertificatesGallery({ emptyHint, compact = false }) {
                 }}
                 aria-label={`View certificate: ${cert.title}`}
               >
-                <img src={cert.image} alt="" />
+                {cert.type === 'pdf' ? (
+                  <span className="cert-paper-thumb__pdf" aria-hidden="true">
+                    <Icon name="doc" size={26} />
+                    <span className="cert-paper-thumb__pdf-tag">PDF</span>
+                  </span>
+                ) : (
+                  <img src={cert.image} alt="" />
+                )}
               </button>
             ))}
           />
