@@ -93,8 +93,8 @@ export default function Projects() {
               spotlightColor="rgba(111, 199, 214, 0.16)"
             >
               <div className="project-card__cover" aria-hidden="true">
+                <img src={`${import.meta.env.BASE_URL}${p.image}`} alt="" width="1536" height="1024" loading="lazy" decoding="async" />
                 <span className="project-card__index">{p.index}</span>
-                <Icon name={p.icon} size={30} className="project-card__glyph" />
               </div>
               <div className="project-card__body">
                 <div className="project-card__meta">
@@ -107,11 +107,11 @@ export default function Projects() {
                   <span className="project-card__highlight-label">Highlight</span>
                   {p.highlight}
                 </p>
-                <ul className="tech-stack">
+                {p.stack.length > 0 && <ul className="tech-stack">
                   {p.stack.map((t) => (
                     <li key={t}>{t}</li>
                   ))}
-                </ul>
+                </ul>}
                 <div className="project-card__links">
                   <ProjectCta cta={p.cta} />
                 </div>
@@ -134,7 +134,7 @@ export default function Projects() {
             <AnimatedContent key={`${category}-${p.id}`} distance={16}>
               <SpotlightCard className="project-row" spotlightColor="rgba(111, 199, 214, 0.12)">
                 <div className="project-row__cover" aria-hidden="true">
-                  <Icon name={p.icon} size={22} />
+                  <img src={`${import.meta.env.BASE_URL}${p.image}`} alt="" width="1536" height="1024" loading="lazy" decoding="async" />
                 </div>
                 <div className="project-row__body">
                   <h3>{p.title}</h3>

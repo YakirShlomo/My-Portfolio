@@ -18,14 +18,31 @@ export const PROJECT_CATEGORIES = [
 
 export const PROJECTS = [
   {
-    id: 'event-inventory',
+    id: 'tula-y',
+    image: 'images/projects/tula-y.webp',
     index: '01',
+    icon: 'layer-group',
+    tag: 'Client site · Event design',
+    year: null,
+    featured: true,
+    categories: ['Client sites'],
+    title: 'Tula.y',
+    description:
+      'A Hebrew website for an event-design studio, showcasing wedding styling, bridal bouquets, table arrangements and celebrations in central and southern Israel.',
+    highlight:
+      'A public home for the Tula event-design brand, bringing its services and visual identity together in one place.',
+    stack: [],
+    cta: { type: 'external', href: 'https://tula-y.com' },
+  },
+  {
+    id: 'event-inventory',
+    image: 'images/projects/event-inventory.webp',
+    index: '02',
     icon: 'boxes-stacked',
     tag: 'Full-stack · Automation',
     year: '2026',
-    featured: true,
     categories: ['Full-stack', 'Private/Internal'],
-    title: 'Event Inventory & Automation Platform',
+    title: 'Tula Inventory',
     description:
       'A full-stack system for event businesses to manage inventory, expenses and profit — stock levels update automatically as bookings move, with a Telegram bot for on-the-go control.',
     highlight:
@@ -33,7 +50,7 @@ export const PROJECTS = [
     stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Telegram Bot API', 'CalDAV'],
     cta: {
       type: 'private',
-      name: 'Event Inventory & Automation Platform',
+      name: 'Tula Inventory',
       tag: 'Full-stack · Automation',
       stack: 'React, TypeScript, Supabase, PostgreSQL, Telegram Bot API, CalDAV',
       note: 'This was built for a client’s internal operations, so I can’t host a public demo or share source access here. I’m glad to walk you through the architecture and the decisions behind it directly.',
@@ -41,7 +58,8 @@ export const PROJECTS = [
   },
   {
     id: 'taxfolder',
-    index: '02',
+    image: 'images/projects/taxfolder.webp',
+    index: '03',
     icon: 'file-invoice-dollar',
     tag: 'SaaS · Full-stack',
     year: '2026',
@@ -56,7 +74,8 @@ export const PROJECTS = [
   },
   {
     id: 'house-helper',
-    index: '03',
+    image: 'images/projects/house-helper.webp',
+    index: '04',
     icon: 'house-chimney',
     tag: 'Mobile · Cloud infra',
     year: '2025',
@@ -77,7 +96,8 @@ export const PROJECTS = [
   },
   {
     id: 'snapmywedding',
-    index: '04',
+    image: 'images/projects/snapmywedding.webp',
+    index: '05',
     icon: 'images',
     tag: 'Full-stack · Media',
     year: '2025',
@@ -92,7 +112,8 @@ export const PROJECTS = [
   },
   {
     id: 'travel-with-tal',
-    index: '05',
+    image: 'images/projects/travel-with-tal.webp',
+    index: '06',
     icon: 'umbrella-beach',
     tag: 'Client site · Full-stack',
     year: null,
@@ -110,6 +131,7 @@ export const PROJECTS = [
 export const SECONDARY_PROJECTS = [
   {
     id: 'tula-build',
+    image: 'images/projects/tula-build.webp',
     icon: 'diagram-project',
     categories: ['Private/Internal'],
     title: 'Tula Build',
@@ -125,21 +147,8 @@ export const SECONDARY_PROJECTS = [
     },
   },
   {
-    id: 'tula-y',
-    icon: 'layer-group',
-    categories: ['Private/Internal'],
-    title: 'Tula.y',
-    description: 'Another piece of the Tula product line, not deployed publicly yet.',
-    stack: [],
-    cta: {
-      type: 'private',
-      name: 'Tula.y',
-      tag: 'Tula product line',
-      note: 'Tula.y hasn’t been deployed publicly yet, so there’s no live demo to share here. I’m glad to walk you through it directly.',
-    },
-  },
-  {
     id: 'star-wars-scene',
+    image: 'images/projects/star-wars-scene.webp',
     icon: 'clapperboard',
     categories: ['Creative'],
     title: 'Star Wars — cinematic scene',
